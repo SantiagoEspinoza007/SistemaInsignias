@@ -44,7 +44,7 @@
       </div>
     </div>
     <!--  Main  -->
-    <div class="main h-full w-full">
+    <div class="main h-full w-full bg-clipAzul">
       <div class="border h-[calc(100vh-50px)] border-cyan-600 rounded-md border-2">
         <div class="cards mt-10 ml-9">
           <div class="insigniasU">
@@ -145,14 +145,9 @@ export default {
   border: 1px solid #202D8D;
 }
 
-
 .button-content {
   display: flex;
   align-items: center;
-}
-
-.main {
-  background-color: #202D8D;
 }
 
 .insigniasU {

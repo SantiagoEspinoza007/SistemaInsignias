@@ -7,14 +7,13 @@
         <img src="../img/LogoClipp.png">
       </div>
       <div class="menu h-[calc(100vh-50px)]">
-        <!--        <div class="px - [20px] flex flex-col">-->
         <ul>
           <li>
             <router-link to="/">
               <button :class="['button', { 'active-button': currentPage === '/' }]">
                 <div class="button-content">
                   <img src="../img/home-b.svg" alt="Inicio">
-                  <span>Home</span>
+                  <span>Inicio</span>
                 </div>
               </button>
             </router-link>
@@ -40,25 +39,24 @@
             </router-link>
           </li>
         </ul>
-        <!--        </div>-->
       </div>
     </div>
     <!--  Main  -->
-    <div class="main h-full w-full">
-      <div class="border h-[calc(100vh-50px)] border-cyan-600 rounded-md border-2">
+    <div class="main w-full h-auto bg-clipAzul">
+      <div class="border h-[calc(100vh-50px)] border-cyan-600 rounded-md border-2 p-12">
         <div class="despegable-servicio">
-          <div class="select" @click="toggleDropdown">
-            <span class="selected">KTaxi</span>
-            <div :class="{'flecha': true, 'flecha-rotate': dropdownOpen}"></div>
+          <div class="select" @click="toggleDropdown('dropdownS')">
+            <span>KTaxi</span>
+            <div :class="{'flecha': true, 'flecha-rotate': dropdowns.dropdownS}"></div>
           </div>
-          <ul :class="{'menu-servicio': true, 'menu-servicio-open': dropdownOpen}">
+          <ul :class="{'menu-servicio': true, 'menu-servicio-open': dropdowns.dropdownS}">
             <li>Servicio 1</li>
             <li>Servicio 2</li>
             <li>Servicio 3</li>
             <li class="active">KTaxi</li>
           </ul>
         </div>
-        <div class="cards mt-10 ml-9">
+        <div class="cards mt-10 flex">
           <div class="insigniasF">
             <h3 class="text-2xl font-bold mb-4 text-center p-7">Insignias de Fidelización</h3>
             <div v-for="index in 3" :key="index">
@@ -90,6 +88,23 @@
               </div>
             </div>
           </div>
+          <div class="cont-f flex pl-8">
+            <div class="despegable-FFC">
+              <div class="select-DSC" @click="toggleDropdown('dropdownFFC')">
+                <span>Fecha</span>
+                <div :class="{'flecha-DSC': true, 'flecha-rotate-DSC': dropdowns.dropdownFFC}"></div>
+              </div>
+              <ul :class="{'menu-DSC': true, 'menu-DSC-open': dropdowns.dropdownFFC}">
+                <li class="active-DSC">Fecha 1</li>
+                <li>Fecha 2</li>
+                <li>Fecha 2</li>
+                <li>Fecha 3</li>
+              </ul>
+            </div>
+            <div class="FchartCard bg-white w-96 h-96 rounded-md m-10 text-center">
+              Chart Fidelizacion
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -101,15 +116,19 @@ export default {
   data() {
     return {
       currentPage: '',
-      dropdownOpen: false,
+      dropdowns: {
+        dropdownSC: false,
+        dropdownFFC: false,
+        dropdownS: false,
+      },
     };
   },
   mounted() {
     this.currentPage = this.$route.path;
   },
   methods: {
-    toggleDropdown() {
-      this.dropdownOpen = !this.dropdownOpen;
+    toggleDropdown(dropdown) {
+      this.dropdowns[dropdown] = !this.dropdowns[dropdown];
     },
   },
 };
@@ -169,8 +188,8 @@ export default {
 }
 
 .active-button {
-  background-color: #202D8D; /* Ajusta el color de fondo que deseas para los botones activos */
-  color: white; /* Ajusta el color del texto para los botones activos */
+  background-color: #202D8D;
+  color: white;
 }
 
 .main {
@@ -182,7 +201,6 @@ export default {
   width: 75px;
   min-width: 15em;
   position: relative;
-  margin: 2em;
 }
 
 .despegable-servicio * {
@@ -199,11 +217,6 @@ export default {
   padding: 8px 14px 8px 14px;
   cursor: pointer;
   transition: background 0.3s;
-}
-
-.select-clicked {
-  border: 2px #202D8D solid;
-  box-shadow: 0 0 0.8em #202D8D;
 }
 
 .select:hover {
@@ -265,7 +278,7 @@ export default {
 .insigniasF {
   width: 750px;
   height: auto;
-  background-color: #ffffff; /* Color de fondo blanco para el card */
+  background-color: #ffffff;
   padding: 20px;
   border-radius: 10px;
 }
