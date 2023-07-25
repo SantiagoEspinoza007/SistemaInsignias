@@ -7,7 +7,6 @@
         <img src="../img/LogoClipp.png">
       </div>
       <div class="menu h-[calc(100vh-50px)]">
-        <!--        <div class="px - [20px] flex flex-col">-->
         <ul>
           <li>
             <router-link to="/">
@@ -40,7 +39,6 @@
             </router-link>
           </li>
         </ul>
-        <!--        </div>-->
       </div>
     </div>
     <!--  Main  -->
