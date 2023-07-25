@@ -169,8 +169,8 @@ export default {
 }
 
 .active-button {
-  background-color: #202D8D; /* Ajusta el color de fondo que deseas para los botones activos */
-  color: white; /* Ajusta el color del texto para los botones activos */
+  background-color: #202D8D; 
+  color: white; 
 }
 
 .main {
@@ -265,7 +265,7 @@ export default {
 .insigniasF {
   width: 750px;
   height: auto;
-  background-color: #ffffff; /* Color de fondo blanco para el card */
+  background-color: #ffffff;
   padding: 20px;
   border-radius: 10px;
 }
