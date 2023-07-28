@@ -101,8 +101,9 @@
                 <li>Fecha 3</li>
               </ul>
             </div>
-            <div class="FchartCard bg-white w-96 h-96 rounded-md m-10 text-center">
-              Chart Fidelizacion
+
+            <div class="FchartCard bg-white w-auto h-auto rounded-md m-10 text-center">
+              <Bar :chart-options="ChartOptions" :chart-data="charData"></Bar>
             </div>
           </div>
         </div>
@@ -112,7 +113,12 @@
 </template>
 
 <script>
+import {Bar} from "vue-chartjs";
+import { Chart, DoughnutController, ArcElement, Tooltip } from 'chart.js';
+Chart.register(DoughnutController, ArcElement, Tooltip);
+
 export default {
+  components: {Bar},
   data() {
     return {
       currentPage: '',

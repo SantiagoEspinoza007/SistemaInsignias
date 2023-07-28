@@ -118,11 +118,11 @@
             <div class="chartF">
               <div class="menusCharts flex justify-between mb-16">
                 <div class="despegable-SC">
-                  <div class="select-DSC" @click="toggleDropdown('dropdownSC')">
+                  <div class="select-DSC" @click="toggleDropdown('dropdownSCF')">
                     <span>Todos los Servicios</span>
-                    <div :class="{'flecha-DSC': true, 'flecha-rotate-DSC': dropdowns.dropdownSC}"></div>
+                    <div :class="{'flecha-DSC': true, 'flecha-rotate-DSC': dropdowns.dropdownSCF}"></div>
                   </div>
-                  <ul :class="{'menu-DSC': true, 'menu-DSC-open': dropdowns.dropdownSC}">
+                  <ul :class="{'menu-DSC': true, 'menu-DSC-open': dropdowns.dropdownSCF}">
                     <li>Servicio 1</li>
                     <li>Servicio 2</li>
                     <li>Servicio 3</li>
@@ -130,11 +130,11 @@
                   </ul>
                 </div>
                 <div class="despegable-FFC">
-                  <div class="select-DSC" @click="toggleDropdown('dropdownFFC')">
+                  <div class="select-DSC" @click="toggleDropdown('dropdownFCF')">
                     <span>Fecha</span>
-                    <div :class="{'flecha-DSC': true, 'flecha-rotate-DSC': dropdowns.dropdownFFC}"></div>
+                    <div :class="{'flecha-DSC': true, 'flecha-rotate-DSC': dropdowns.dropdownFCF}"></div>
                   </div>
-                  <ul :class="{'menu-DSC': true, 'menu-DSC-open': dropdowns.dropdownFFC}">
+                  <ul :class="{'menu-DSC': true, 'menu-DSC-open': dropdowns.dropdownFCF}">
                     <li class="active-DSC">Fecha 1</li>
                     <li>Fecha 2</li>
                     <li>Fecha 2</li>
@@ -143,17 +143,17 @@
                 </div>
               </div>
               <div class="cardChart w-full">
-                (chart Fidelizacion)
+
               </div>
             </div>
             <div class="chartU">
               <div class="menusCharts flex justify-between mb-16">
                 <div class="despegable-SC">
-                  <div class="select-DSC" @click="toggleDropdown('dropdownSC')">
+                  <div class="select-DSC" @click="toggleDropdown('dropdownSCU')">
                     <span>Todos los Servicios</span>
-                    <div :class="{'flecha-DSC': true, 'flecha-rotate-DSC': dropdowns.dropdownSC}"></div>
+                    <div :class="{'flecha-DSC': true, 'flecha-rotate-DSC': dropdowns.dropdownSCU}"></div>
                   </div>
-                  <ul :class="{'menu-DSC': true, 'menu-DSC-open': dropdowns.dropdownSC}">
+                  <ul :class="{'menu-DSC': true, 'menu-DSC-open': dropdowns.dropdownSCU}">
                     <li>Servicio 1</li>
                     <li>Servicio 2</li>
                     <li>Servicio 3</li>
@@ -161,11 +161,11 @@
                   </ul>
                 </div>
                 <div class="despegable-FFC">
-                  <div class="select-DSC" @click="toggleDropdown('dropdownFFC')">
+                  <div class="select-DSC" @click="toggleDropdown('dropdownFCU')">
                     <span>Fecha</span>
-                    <div :class="{'flecha-DSC': true, 'flecha-rotate-DSC': dropdowns.dropdownFFC}"></div>
+                    <div :class="{'flecha-DSC': true, 'flecha-rotate-DSC': dropdowns.dropdownFCU}"></div>
                   </div>
-                  <ul :class="{'menu-DSC': true, 'menu-DSC-open': dropdowns.dropdownFFC}">
+                  <ul :class="{'menu-DSC': true, 'menu-DSC-open': dropdowns.dropdownFCU}">
                     <li class="active-DSC">Fecha 1</li>
                     <li>Fecha 2</li>
                     <li>Fecha 2</li>
@@ -214,8 +214,10 @@ export default {
     return {
       currentPage: '',
       dropdowns: {
-        dropdownSC: false,
-        dropdownFFC: false,
+        dropdownSCF: false,
+        dropdownFCF: false,
+        dropdownSCU: false,
+        dropdownFCU: false,
       },
       users: [
         { id: 1, KTaxi: 20, Delivery: 10, otro: 0, TotalI_Obtenidas: 0, TotalB_Obtenidos: 0 },
