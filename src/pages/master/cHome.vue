@@ -142,7 +142,7 @@
                   </ul>
                 </div>
               </div>
-              <div class="cardChart w-full">
+              <div class="cardChart">
 
               </div>
             </div>
@@ -173,7 +173,7 @@
                   </ul>
                 </div>
               </div>
-              <div class="cardChart w-full">
+              <div class="cardChart">
                 (chart Usabilidad)
               </div>
             </div>

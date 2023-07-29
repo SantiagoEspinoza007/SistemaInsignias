@@ -88,7 +88,7 @@
               </div>
             </div>
           </div>
-          <div class="cont-f flex pl-8">
+          <div class="cont-f pl-8 space-y-4">
             <div class="despegable-FFC">
               <div class="select-DSC" @click="toggleDropdown('dropdownFFC')">
                 <span>Fecha</span>
@@ -101,10 +101,28 @@
                 <li>Fecha 3</li>
               </ul>
             </div>
-
-            <div class="FchartCard bg-white w-auto h-auto rounded-md m-10 text-center">
-              <Bar :chart-options="ChartOptions" :chart-data="charData"></Bar>
+            <div class="FchartCard text-center text-gray-600">
+              <Bar
+                  :options="chartOptions"
+                  :data="chartData"
+              />
             </div>
+            <table class="table-auto bg-white ">
+              <thead>
+              <tr>
+                <th class="px-4 py-2 text-sm">Usuarios</th>
+                <th class="px-4 py-2 text-sm">Insiginias obtenidas</th>
+                <th class="px-4 py-2 text-sm">Beneficios reclamados</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr v-for="user in users" :key="user.id">
+                <td class="border px-4 py-2">{{ user.id }}</td>
+                <td class="border px-4 py-2">{{ user.Inisgnias_Obtenidas }}</td>
+                <td class="border px-4 py-2">{{ user.Beneficios_Reclamados }}</td>
+              </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -113,20 +131,101 @@
 </template>
 
 <script>
-import {Bar} from "vue-chartjs";
-import { Chart, DoughnutController, ArcElement, Tooltip } from 'chart.js';
-Chart.register(DoughnutController, ArcElement, Tooltip);
+import {Bar} from 'vue-chartjs'
+import {Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale} from 'chart.js'
+
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 export default {
   components: {Bar},
   data() {
     return {
+      chartData: {
+        labels: [
+            '20 Viajes',
+            'Forma Pago',
+            '30km',
+            'Recomendar 1',
+            '60km',
+            '100km',
+            'Recomendar 2',
+            '10 Viajes',
+            'Calificar Chofer',
+            'Opinion'
+        ],
+        datasets: [{
+          axis: 'y',
+          label: 'Insignias fidelización más conseguidas',
+          data: [150, 123, 234, 220, 127, 110, 100, 95, 99, 105],
+          fill: false,
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.4)',
+            'rgba(255, 159, 64, 0.4)',
+            'rgba(255, 205, 86, 0.4)',
+            'rgba(75, 192, 192, 0.4)',
+            'rgba(54, 162, 235, 0.4)',
+            'rgba(153, 102, 255, 0.4)',
+            'rgba(201, 203, 207, 0.4)',
+            'rgba(255, 102, 255, 0.4)',
+            'rgba(102, 255, 102, 0.4)',
+            'rgba(102, 102, 255, 0.4)',
+          ],
+          borderColor: [
+            'rgb(255, 99, 132)',
+            'rgb(255, 159, 64)',
+            'rgb(255, 205, 86)',
+            'rgb(75, 192, 192)',
+            'rgb(54, 162, 235)',
+            'rgb(153, 102, 255)',
+            'rgb(201, 203, 207)',
+            'rgb(255, 102, 255)',
+            'rgb(102, 255, 102)',
+            'rgb(102, 102, 255)',
+          ],
+          borderWidth: 1,
+        }],
+      },
+      chartOptions: {
+        responsive: true,
+        indexAxis: 'y',
+        plugins: {
+          title: {
+            display: true,
+            text: 'Insignias Fidelización mas conseguidas',
+            padding: {
+              top: 10,
+              bottom: 30
+            }
+          },
+          legend: {
+            display: true,
+            position: 'bottom',
+            labels: {
+              usePointStyle: true,
+            },
+
+          },
+        },
+        scales: {
+          y: {
+            ticks: {
+              display: false,
+            },
+          },
+        },
+      },
       currentPage: '',
       dropdowns: {
         dropdownSC: false,
         dropdownFFC: false,
         dropdownS: false,
       },
+      users: [
+        { id: 1, Inisgnias_Obtenidas: 15, Beneficios_Reclamados: 10 },
+        { id: 2, Inisgnias_Obtenidas: 11, Beneficios_Reclamados: 5 },
+        { id: 3, Inisgnias_Obtenidas: 21, Beneficios_Reclamados: 15 },
+        { id: 4, Inisgnias_Obtenidas: 8, Beneficios_Reclamados: 2 },
+      ],
     };
   },
   mounted() {
@@ -283,7 +382,7 @@ export default {
 
 .insigniasF {
   width: 750px;
-  height: auto;
+  height: 650px;
   background-color: #ffffff;
   padding: 20px;
   border-radius: 10px;
@@ -308,5 +407,14 @@ export default {
   flex-direction: column;
   align-items: center;
   padding: 10px 5px 10px 5px;
+}
+
+.FchartCard {
+  width: 525px;
+  height: 400px;
+  background-color: #ffffff;
+  margin-top: 7%;
+  padding: 20px;
+  border-radius: 10px;
 }
 </style>
