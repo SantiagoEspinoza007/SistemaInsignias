@@ -1,12 +1,12 @@
 <template>
   <div class="layout w-screen h-screen flex">
     <!--  Side Bar -->
-    <div class="sideBar w-[400px] h-full">
-      <div class="logo h-[200xp]">
+    <div class="sideBar w-[400px]">
+      <div class="logo">
         <img src="../img/Clipp.png">
         <img src="../img/LogoClipp.png">
       </div>
-      <div class="menu h-[calc(100vh-50px)]">
+      <div class="menu">
         <ul>
           <li>
             <router-link to="/">
@@ -42,7 +42,7 @@
       </div>
     </div>
     <!--  Main  -->
-    <div class="main w-full h-auto bg-clipAzul p-6">
+    <div class="main w-full bg-clipAzul p-6">
       <div class="border h-full border-cyan-600 rounded-md border-2 p-12 flex">
         <div class="card-insignias flex-col justify-center">
           <div class="despegable-servicio mb-10">

@@ -1,8 +1,8 @@
 <template>
   <div class="layout w-screen h-screen flex">
     <!--  Side Bar -->
-    <div class="sideBar w-[400px] h-full">
-      <div class="logo h-[200xp]">
+    <div class="sideBar w-[400px]">
+      <div class="logo">
         <img src="../../img/Clipp.png">
         <img src="../../img/LogoClipp.png">
       </div>
