@@ -1,7 +1,7 @@
 <template>
   <div class="layout w-screen h-screen flex">
     <!--  Side Bar -->
-    <div class="sideBar w-[400px]">
+    <div class="sideBar w-[400px] h-[1000px]">
       <div class="logo">
         <img src="../img/Clipp.png">
         <img src="../img/LogoClipp.png">
@@ -106,7 +106,7 @@
       </div>
     </div>
     <!--  Main  -->
-    <div class="main w-full h-auto bg-clipAzul p-6">
+    <div class="main w-[1800px] h-[1000px] bg-clipAzul p-6">
       <div class="border h-full border-cyan-600 rounded-md border-2 p-12 flex ">
         <div class="card-insignias flex-col justify-center">
           <div class="insigniasU mt-20">
@@ -161,7 +161,7 @@
                 :data="chartData"
             />
           </div>
-          <table class="table-auto bg-white absolute rounded-md ">
+          <table class="table-auto bg-white rounded-md ">
             <thead>
             <tr>
               <th class="px-8 py-2 text-sm">Insiginias usabilidad</th>

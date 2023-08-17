@@ -1,7 +1,7 @@
 <template>
   <div class="layout w-screen h-screen flex">
     <!--  Side Bar -->
-    <div class="sideBar w-[400px]">
+    <div class="sideBar w-[400px] h-[1000px]">
       <div class="logo">
         <img src="../../img/Clipp.png">
         <img src="../../img/LogoClipp.png">
@@ -106,8 +106,8 @@
       </div>
     </div>
     <!--  Main  -->
-    <div class="main w-full bg-clipAzul p-6">
-      <div class="border w-full border-cyan-600 rounded-md border-2 p-4 flex">
+    <div class="main w-[1800px] h-[1000px] bg-clipAzul p-6">
+      <div class="border h-full border-cyan-600 rounded-md border-2 p-4 flex">
         <div class="insigniasF-U ml-8 mb-4 space-y-4 flex-col">
           <div class="insignias mt-2">
             <h3 class="text-2xl font-bold mb-4 text-center p-1">Insignias de Fidelización</h3>

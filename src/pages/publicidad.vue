@@ -1,7 +1,7 @@
 <template>
   <div class="layout w-screen h-screen flex">
     <!--  Side Bar -->
-    <div class="sideBar w-[400px]">
+    <div class="sideBar w-[400px] h-[1000px]">
       <div class="logo">
         <img src="../img/Clipp.png">
         <img src="../img/LogoClipp.png">
@@ -106,7 +106,7 @@
       </div>
     </div>
     <!--  Main  -->
-    <div class="main w-full bg-clipAzul p-6">
+    <div class="main w-[1800px] h-[1000px] bg-clipAzul p-6">
       <div class="border h-full border-cyan-600 rounded-md border-2 p-12 flex">
         <div class="card rounded-md bg-gray-100 w-[600px] p-8">
           <form>
@@ -304,7 +304,7 @@ export default {
   right: 0;
   z-index: 100;
   background: rgba(0, 0, 0, 0.4);
-}
+}h-[1000px]
 
 .modal {
   position: fixed;
