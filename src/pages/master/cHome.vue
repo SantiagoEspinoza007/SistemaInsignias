@@ -38,6 +38,70 @@
               </button>
             </router-link>
           </li>
+          <li class="mt-48">
+            <router-link to="/insignias">
+              <button :class="['button', { 'active-button': currentPage === '/insignias' }]">
+                <div class="button-content">
+                  <img src="../../img/upload-b.svg" alt="Insignias">
+                  <span>Insignias</span>
+                </div>
+              </button>
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/publicidad">
+              <button :class="['button', { 'active-button': currentPage === '/publicidad' }]">
+                <div class="button-content">
+                  <img src="../../img/upload-b.svg" alt="Publicidad">
+                  <span>Publicidad</span>
+                </div>
+              </button>
+            </router-link>
+          </li>
+          <li>
+            <button @click="showModal2 = true" class="menu-button" type="button">
+              <img src="../../img/upload-b.svg" alt="upload" class="icono">
+              <span class="texto">Agregar Cupón</span>
+            </button>
+            <transition name="fade">
+              <div class="modal-overlay" v-if="showModal2">
+              </div>
+            </transition>
+            <transition name="fade">
+              <div class="modal" v-if="showModal2">
+                <div class="aggCupon">
+                  <p class="mb-4">Agregar Cupón</p>
+                  <label>Porcentaje de descuento</label>
+                  <input id="input-Pdescuento" type="number" name="porcentaje" placeholder="%" min="0">
+                </div>
+                <div class="table-Modal">
+                  <table class="table-auto rounded-md bg-white">
+                    <thead>
+                    <tr>
+                      <th class="px-8 py-2">Número</th>
+                      <th class="px-8 py-2">Cupón</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="cupon in cupones" :key="cupon.num">
+                      <td class="border px-8 py-2">{{ cupon.num }}</td>
+                      <td class="border px-8 py-2">{{ cupon.cupon}}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                  <button class="button-Eliminar" type="button">
+                    <span>Eliminar</span>
+                  </button>
+                  <button class="button-Editar" type="button">
+                    <span>Editar</span>
+                  </button>
+                </div>
+                <button @click="showModal2= false" class="modal-buttom" type="button">
+                  <span class="texto">Cerrar</span>
+                </button>
+              </div>
+            </transition>
+          </li>
         </ul>
       </div>
     </div>
@@ -353,6 +417,13 @@ export default {
         {id: 1, KTaxi: 20, Delivery: 10, otro: 0, TotalI_Obtenidas: 0, TotalB_Obtenidos: 0},
         {id: 2, KTaxi: 0, Delivery: 0, otro: 0, TotalI_Obtenidas: 0, TotalB_Obtenidos: 0},
         {id: 3, KTaxi: 20, Delivery: 10, otro: 0, TotalI_Obtenidas: 0, TotalB_Obtenidos: 0},
+      ],
+      showModal: false,
+      showModal2: false,
+      cupones: [
+        {num: 1, cupon: 20},
+        {num: 2, cupon: 0},
+        {num: 3, cupon: 20},
       ],
     };
   },
