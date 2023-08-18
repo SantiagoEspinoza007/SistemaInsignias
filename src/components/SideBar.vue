@@ -1,57 +1,17 @@
 <template>
-  <div class="sideBar w-[400px]">
+  <div class="sideBar w-[400px] h-[1750px]">
     <div class="logo">
-      <img src="../img/Clipp.png">
-      <img src="../img/LogoClipp.png">
+      <img src="../img/Clipp.png" alt="Clipp">
+      <img src="../img/LogoClipp.png" alt="LogoClipp">
     </div>
     <div class="menu">
       <ul>
-        <li>
-          <router-link to="/">
-            <button :class="['button', { 'active-button': currentPage === '/' }]">
+        <li v-for="page in pages" :key="page.path">
+          <router-link :to="page.path">
+            <button :class="['button', { 'active-button': currentPage === page.path }]">
               <div class="button-content">
-                <img src="../img/home-b.svg" alt="Inicio">
-                <span>Inicio</span>
-              </div>
-            </button>
-          </router-link>
-        </li>
-        <li>
-          <router-link to="/fidelizacion">
-            <button :class="['button', { 'active-button': currentPage === '/fidelizacion' }]">
-              <div class="button-content">
-                <img src="../img/Fidelizacion-b.svg" alt="Fidelizacion">
-                <span>Fidelización</span>
-              </div>
-            </button>
-          </router-link>
-        </li>
-        <li>
-          <router-link to="/usabilidad">
-            <button :class="['button', { 'active-button': currentPage === '/usabilidad' }]">
-              <div class="button-content">
-                <img src="../img/Usabilidad-b.svg" alt="Usabilidad">
-                <span>Usabilidad</span>
-              </div>
-            </button>
-          </router-link>
-        </li>
-        <li class="mt-48">
-          <router-link to="/insignias">
-            <button :class="['button', { 'active-button': currentPage === '/insignias' }]">
-              <div class="button-content">
-                <img src="../img/upload-b.svg" alt="Insignias">
-                <span>Insignias</span>
-              </div>
-            </button>
-          </router-link>
-        </li>
-        <li>
-          <router-link to="/publicidad">
-            <button :class="['button', { 'active-button': currentPage === '/publicidad' }]">
-              <div class="button-content">
-                <img src="../img/upload-w.svg" alt="Publicidad">
-                <span>Publicidad</span>
+                <img :src="page.icon" :alt="page.name">
+                <span>{{ page.name }}</span>
               </div>
             </button>
           </router-link>
@@ -65,26 +25,76 @@
 export default {
   data() {
     return {
-      currentPage: this.$route.path,
+      currentPage: '',
+      pages: [
+        { path: '/', name: 'Inicio', icon: '../img/home-b.svg' },
+        { path: '/fidelizacion', name: 'Fidelización', icon: '../img/Fidelizacion-b.svg' },
+        { path: '/usabilidad', name: 'Usabilidad', icon: '../img/Usabilidad-b.svg' },
+        { path: '/insignias', name: 'Cargar', icon: '../img/upload-w.svg' }
+      ]
     };
   },
-  watch: {
-    '$route'(to, from) {
-      this.currentPage = to.path;
-    },
-  },
+  mounted() {
+    this.currentPage = this.$route.path;
+  }
 };
 </script>
 
 <style scoped>
-/* Estilos para los botones activos */
+.sideBar {
+  align-items: center;
+  padding: 30px;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+}
+
+.logo img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.menu {
+  padding-top: 20px;
+}
+
+.menu ul {
+  list-style: none;
+  padding: 10px;
+  margin: 10px;
+}
+
+.menu li {
+  margin-bottom: 30px;
+}
+
+.button img {
+  margin-right: 10px;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  width: 230px;
+  height: 75px;
+  padding: 26px 84px 27px 76px;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 10px;
+  border: 1px solid #202D8D;
+}
+
+.button-content {
+  display: flex;
+  align-items: center;
+}
+
 .active-button {
   background-color: #202D8D;
   color: white;
 }
-
-/* Estilos para los íconos activos */
-.active-button img {
-  filter: invert(1); /* Invierte los colores del ícono */
-}
 </style>
+

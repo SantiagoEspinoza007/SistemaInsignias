@@ -1,7 +1,7 @@
 <template>
   <div class="layout w-screen h-screen flex">
     <!--  Side Bar -->
-    <div class="sideBar w-[400px] h-[1000px]">
+    <div class="sideBar w-[400px] h-[1750px]">
       <div class="logo">
         <img src="../img/Clipp.png">
         <img src="../img/LogoClipp.png">
@@ -38,134 +38,187 @@
               </button>
             </router-link>
           </li>
-          <li class="mt-48">
+          <li class="absolute bottom-0">
             <router-link to="/insignias">
               <button :class="['button', { 'active-button': currentPage === '/insignias' }]">
                 <div class="button-content">
                   <img src="../img/upload-w.svg" alt="Insignias">
-                  <span>Insignias</span>
+                  <span>Cargar</span>
                 </div>
               </button>
             </router-link>
-          </li>
-          <li>
-            <router-link to="/publicidad">
-              <button :class="['button', { 'active-button': currentPage === '/publicidad' }]">
-                <div class="button-content">
-                  <img src="../img/upload-b.svg" alt="Publicidad">
-                  <span>Publicidad</span>
-                </div>
-              </button>
-            </router-link>
-          </li>
-          <li>
-            <button @click="showModal2 = true" class="menu-button" type="button">
-              <img src="../img/upload-b.svg" alt="upload" class="icono">
-              <span class="texto">Agregar Cupón</span>
-            </button>
-            <transition name="fade">
-              <div class="modal-overlay" v-if="showModal2">
-              </div>
-            </transition>
-            <transition name="fade">
-              <div class="modal" v-if="showModal2">
-                <div class="aggCupon">
-                  <p class="mb-4">Agregar Cupón</p>
-                  <label>Porcentaje de descuento</label>
-                  <input id="input-Pdescuento" type="number" name="porcentaje" placeholder="%" min="0">
-                </div>
-                <div class="table-Modal">
-                  <table class="table-auto rounded-md bg-white">
-                    <thead>
-                    <tr>
-                      <th class="px-8 py-2">Número</th>
-                      <th class="px-8 py-2">Cupón</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-for="cupon in cupones" :key="cupon.num">
-                      <td class="border px-8 py-2">{{ cupon.num }}</td>
-                      <td class="border px-8 py-2">{{ cupon.cupon}}</td>
-                    </tr>
-                    </tbody>
-                  </table>
-                  <button class="button-Eliminar" type="button">
-                    <span>Eliminar</span>
-                  </button>
-                  <button class="button-Editar" type="button">
-                    <span>Editar</span>
-                  </button>
-                </div>
-                <button @click="showModal2= false" class="modal-buttom" type="button">
-                  <span class="texto">Cerrar</span>
-                </button>
-              </div>
-            </transition>
           </li>
         </ul>
       </div>
     </div>
     <!--  Main  -->
-    <div class="main w-[1800px] h-[1000px] bg-clipAzul p-6">
+    <div class="main w-[1800px] h-[1750px] bg-clipAzul p-6">
       <div class="border h-full border-cyan-600 rounded-md border-2 p-12 flex">
-        <div class="card rounded-md bg-gray-100 w-[600px] p-8">
-          <form>
-            <div class="card-Insignia rounded-md bg-white w-[550px] p-6 block">
-              <h3>Insignia</h3>
-              <div class="actividad m-4">
-                <p>Actividad</p>
-                <input id="input-actividad" type="text" name="actividad"
-                       placeholder="Escribe la actividad que tendrán que completar para conseguir la nueva insignia..."/><br/>
-                <div class="cargarInsignia flex">
-                  <div class="view-Insignia">
+        <div class="col-cargarinfo">
+          <div class="card-actividades rounded-md bg-white w-[600px] p-4 mb-4">
+            <h3 class="mb-4">Actividades</h3>
+            <div class="contenido flex">
+              <div class="actividades-labels mt-4">
+                <h4 class="mb-6">Descripción</h4>
+                <h4 class="mb-6">Cantidad</h4>
+                <h4 class="mb-6">Progreso</h4>
+              </div>
+              <div class="actividades-inputs mb-4">
+                <input class="input-global" type="text" placeholder="Descripción general de la actividad" name="descripcion">
+                <input class="input-global" type="number" placeholder="# de acciones para completar actividad" name="cantidad" min="1">
+                <DropdownMenu :options="menuOptions" class="despegable-global" />
+              </div>
+              <div class="actividades-botones flex flex-col items-end mt-2">
+                <button class="button-global text-[#FF0000FF]" type="button">
+                  <span>Eliminar</span>
+                </button>
+                <button class="button-global text-[#2794F8]" type="button">
+                  <span>Editar</span>
+                </button>
+                <button class="button-global text-[#2794F8]" type="button">
+                  <span>Guardar</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="card-insignias rounded-md bg-white w-[600px] p-4 mb-4">
+            <h3 class="mb-4">Insignias</h3>
+            <div class="contenido flex">
+              <div class="insignias-labels mt-4">
+                <h4 class="mb-6">Título</h4>
+                <h4 class="mb-6">Tipo</h4>
+                <h4 class="mb-6">Actividad</h4>
+                <h4 class="mb-6">Servicio</h4>
+                <h4 class="mb-6">Imágen</h4>
+              </div>
+              <div class="insignias-inputs mb-4">
+                <input class="input-global" type="text" placeholder="Descripción general de la actividad" name="descripcion">
+                <input class="input-global" type="number" placeholder="# de acciones para completar actividad" name="cantidad" min="1">
+                <input class="input-global" type="text" placeholder="Cantidad para completar la actividad" name="descripcion">
+                <DropdownMenu :options="menuOptions" class="despegable-global" />
+                <div class="cargarImagen flex">
+                  <div class="view-Imagen">
                     <canvas ref="canvas" width="100" height="100" style="display: none;"></canvas>
                     <img v-if="imagenPrevia" :src="imagenPrevia" alt="Previsualización de la imagen">
                   </div>
-                  <transition name="fade">
-                    <div class="modal-overlay" v-if="showModal">
-                    </div>
-                  </transition>
-                  <transition name="fade">
-                    <div class="modal" v-if="showModal">
-                      <h2>Sube el diseño de la insignia que quieres añadir</h2>
-                      <div class="view-InsigniaModal">
-                        <input id="input-Insignia" type="file" name="imagen" accept="image/*"
-                               @change="previsualizarImagen">
-                        <canvas ref="canvas" width="100" height="100" style="display: none;"></canvas>
-                        <img v-if="imagenPrevia" :src="imagenPrevia" alt="Previsualización de la imagen">
-                      </div>
-                      <button @click="showModal = false" class="modal-buttom" type="button">
-                        <span class="texto">Listo</span>
-                      </button>
-                    </div>
-                  </transition>
-                  <button @click="showModal = true" class="upload-buttom" type="button">
-                    <img src="../img/upload-bk.svg" alt="upload" class="icono">
-                    <span class="texto">Cargar</span>
-                  </button>
+                  <div class="self-end ml-4">
+                    <label class="upload-buttom">
+                      <img src="../img/upload-bk.svg" alt="upload" class="icono">
+                      <span>Cargar</span>
+                      <input type="file" style="display: none" accept="image/*" @change="previsualizarImagen"/>
+                    </label>
+                  </div>
                 </div>
               </div>
+              <div class="insignias-botones flex flex-col items-end mt-2">
+                <button class="button-global text-[#FF0000FF]" type="button">
+                  <span>Eliminar</span>
+                </button>
+                <button class="button-global text-[#2794F8]" type="button">
+                  <span>Editar</span>
+                </button>
+                <button class="button-global text-[#2794F8]" type="button">
+                  <span>Guardar</span>
+                </button>
+              </div>
             </div>
-            <button @click="submitForm" class="submit-Button">Enviar</button>
-          </form>
+          </div>
+          <div class="card-publicidad rounded-md bg-white w-[600px] p-4 mb-4">
+            <h3 class="mb-4">Publicidad</h3>
+            <div class="contenido flex">
+              <div class="publicidad-labels mt-4">
+                <h4 class="mb-6">Imágen</h4>
+              </div>
+              <div class="publicidad-inputs w-[75%] mb-4">
+                <div class="cargarImagen flex">
+                  <div class="view-Imagen">
+                    <canvas ref="canvas" width="100" height="100" style="display: none;"></canvas>
+                    <img v-if="imagenPrevia" :src="imagenPrevia" alt="Previsualización de la imagen">
+                  </div>
+                  <div class="ml-4 self-end">
+                    <label class="upload-buttom">
+                      <img src="../img/upload-bk.svg" alt="upload" class="icono">
+                      <span>Cargar</span>
+                      <input type="file" style="display: none" accept="image/*" @change="previsualizarImagen"/>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="publicidad-botones flex flex-col items-end mt-2">
+                <button class="button-global text-[#FF0000FF]" type="button">
+                  <span>Eliminar</span>
+                </button>
+                <button class="button-global text-[#2794F8]" type="button">
+                  <span>Guardar</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="card-cupones rounded-md bg-white w-[600px] p-4 mb-4">
+            <h3 class="mb-4">Cupones</h3>
+            <div class="contenido flex">
+              <div class="cupones-labels ">
+                <h4 class="mb-6">% de Descuento</h4>
+                <h4 class="mb-6">Descripcion</h4>
+                <h4 class="mb-6">Fecha</h4>
+                <h4 class="mb-6">Tiempo</h4>
+                <h4 class="mb-6">Imágen</h4>
+              </div>
+              <div class="cupones-inputs mb-4">
+                <input class="input-global" type="text" placeholder="Descripción general de la actividad" name="descripcion">
+                <input class="input-global" type="number" placeholder="# de acciones para completar actividad" name="cantidad" min="1">
+                <input class="input-global" type="text" placeholder="Cantidad para completar la actividad" name="descripcion">
+                <DropdownMenu :options="menuOptions" class="despegable-global" />
+                <div class="cargarImagen flex">
+                  <div class="view-Imagen">
+                    <canvas ref="canvas" width="100" height="100" style="display: none;"></canvas>
+                    <img v-if="imagenPrevia" :src="imagenPrevia" alt="Previsualización de la imagen">
+                  </div>
+                  <div class="self-end ml-4">
+                    <label class="upload-buttom">
+                      <img src="../img/upload-bk.svg" alt="upload" class="icono">
+                      <span>Cargar</span>
+                      <input type="file" style="display: none" accept="image/*" @change="previsualizarImagen"/>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="cupones-botones flex flex-col items-end mt-2">
+                <button class="button-global text-[#FF0000FF]" type="button">
+                  <span>Eliminar</span>
+                </button>
+                <button class="button-global text-[#2794F8]" type="button">
+                  <span>Editar</span>
+                </button>
+                <button class="button-global text-[#2794F8]" type="button">
+                  <span>Guardar</span>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
+
+
+
         <div class="cont-Insignia block">
-          
+          <div class="buscar-input">
+
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-export default{
-  data(){
-    return{
+import DropdownMenu from '@/components/DropdownMenu.vue';
+export default {
+  components: {
+    DropdownMenu
+  },
+  data() {
+    return {
+      menuOptions: ['A', 'B', 'C'],
       currentPage: '',
-      dropdowns: {
-        dropdownSC: false,
-        dropdownFFC: false,
-        dropdownS: false,
-      },
       imagenPrevia: null,
       showModal: false,
       showModal2: false,
@@ -180,9 +233,6 @@ export default{
     this.currentPage = this.$route.path;
   },
   methods: {
-    toggleDropdown(dropdown) {
-      this.dropdowns[dropdown] = !this.dropdowns[dropdown];
-    },
     previsualizarImagen(event) {
       const archivo = event.target.files[0];
 
@@ -218,34 +268,6 @@ export default{
   background-color: white;
   padding: 10px;
   border-bottom: 25px;
-}
-
-#input-actividad {
-  position: relative;
-  margin-top: 20px;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  width: 100%;
-  height: 300px;
-  padding: 5px;
-}
-
-#input-actividad::placeholder {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-}
-
-.view-Insignia {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 32px 20px 0 0;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  width: 50%;
-  height: 200px;
-  padding: 5px;
 }
 
 .upload-buttom {
@@ -298,17 +320,18 @@ export default{
   z-index: 101;
 }
 
-.view-InsigniaModal{
+.view-Imagen {
   position: relative;
   margin-top: 20px;
-  border: 2px dashed #ccc;
+  margin-left: 25px;
+  border: 2px solid #ccc;
   border-radius: 8px;
-  width: 100%;
-  height: 300px;
+  width: 150px;
+  height: 150px;
   padding: 5px;
 }
 
-.modal-buttom{
+.modal-buttom {
   display: flex;
   align-items: center;
   padding: 5px;
@@ -343,4 +366,36 @@ export default{
   width: 100px;
   height: 50px;
 }
+
+.input-global {
+  margin-left: 25px;
+  margin-top: 10px;
+  position: relative;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  width: 75%;
+  padding: 5px;
+}
+
+input[type="file"]{
+  color: transparent;
+}
+
+.button-global {
+  margin-bottom: 12px;
+  background-color: white;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+  width: 100px;
+  height: 35px;
+}
+.despegable-global {
+  margin-left: 25px;
+  margin-top: 10px;
+  position: relative;
+  width: 75%;
+}
+
 </style>

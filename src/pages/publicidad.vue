@@ -304,7 +304,7 @@ export default {
   right: 0;
   z-index: 100;
   background: rgba(0, 0, 0, 0.4);
-}h-[1000px]
+}
 
 .modal {
   position: fixed;
@@ -352,30 +352,6 @@ export default {
 }
 
 .submit-Button {
-  margin-top: 25px;
-  background-color: white;
-  border: 2px solid rgb(243 244 246);
-  border-radius: 8px;
-  color: #2794F8;
-  cursor: pointer;
-  position: relative;
-  width: 100px;
-  height: 50px;
-}
-
-.button-Eliminar {
-  margin-top: 25px;
-  background-color: white;
-  border: 2px solid rgb(243 244 246);
-  border-radius: 8px;
-  color: red;
-  cursor: pointer;
-  position: relative;
-  width: 100px;
-  height: 50px;
-}
-
-.button-Editar {
   margin-top: 25px;
   background-color: white;
   border: 2px solid rgb(243 244 246);
