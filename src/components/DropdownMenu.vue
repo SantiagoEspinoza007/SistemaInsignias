@@ -45,6 +45,7 @@ export default {
 <style>
 .despegable-servicio {
   position: relative;
+  font-size: small;
 }
 
 .despegable-servicio * {
@@ -62,8 +63,6 @@ export default {
   cursor: pointer;
   transition: background 0.3s;
 }
-
-
 
 .flecha {
   width: 0;

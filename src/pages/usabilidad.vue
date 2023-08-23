@@ -1,7 +1,7 @@
 <template>
   <div class="layout w-screen h-screen flex">
     <!--  Side Bar -->
-    <div class="sideBar w-[400px] h-[1750px]">
+    <div class="sideBar w-[400px] h-[1000px]">
       <div class="logo">
         <img src="../img/Clipp.png">
         <img src="../img/LogoClipp.png">
