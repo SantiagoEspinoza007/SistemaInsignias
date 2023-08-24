@@ -235,6 +235,7 @@ export default {
   components: {Bar},
   data() {
     return {
+      insignias: [],
       chartDataF: {
         labels: [
           'Mayo',
@@ -376,6 +377,7 @@ export default {
   },
   mounted() {
     this.currentPage = this.$route.path;
+    this.fetchInsignias();
   },
   methods: {
     toggleDropdown(dropdown) {
@@ -384,6 +386,15 @@ export default {
     totalInsigniasObtenidas(user) {
       return user.KTaxi + user.Delivery + user.otro;
     },
+    async fetchInsignias() {
+      try {
+        const response = await fetch('https://backend-clipp-production.up.railway.app/api/insignias');
+        const data = await response.json();
+        this.insignias = data; // Asegúrate de que tu API devuelve un array de objetos con los datos de las insignias
+      } catch (error) {
+        console.error('Error al cargar las insignias:', error);
+      }
+    }
   },
 };
 </script>
