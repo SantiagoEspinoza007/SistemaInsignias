@@ -1,10 +1,10 @@
 <template>
   <div class="despegable-servicio">
-    <button class="select" @click="toggleMenu" :class="{ 'active': isMenuOpen }">
-      <span>{{ selectedOption || placeholder }}</span>
+    <button type="button" class="select" @click="toggleMenu" :class="{ 'active': isMenuOpen }">
+      <span :class="selectedOption ? 'span-selected' : 'span-default'">{{ selectedOption || placeholder }}</span>
       <span class="flecha" :class="{ 'flecha-rotate': isMenuOpen }"></span>
     </button>
-    <ul v-if="isMenuOpen" class="menu-servicio">
+    <ul v-if="isMenuOpen" :class="{ 'menu-servicio-open': isMenuOpen}" class="menu-servicio">
       <li v-for="(option, index) in options" :key="index" @click="selectOption(option)">
         {{ option }}
       </li>
@@ -22,13 +22,22 @@ export default {
     options: {
       type: Array,
       required: true
+    },
+    value: {
+      type: String, // or the appropriate data type for your options
+      default: null
     }
   },
   data() {
     return {
       isMenuOpen: false,
-      selectedOption: null
+      selectedOption: null,
     };
+  },
+  watch: {
+    value(newValue) {
+      this.selectedOption = newValue;
+    }
   },
   methods: {
     toggleMenu() {
@@ -37,6 +46,10 @@ export default {
     selectOption(option) {
       this.selectedOption = option;
       this.isMenuOpen = false;
+      this.$emit('input', option);
+
+      // Emitir un evento personalizado para notificar al formulario que se ha realizado una selección.
+      this.$emit('option-selected', option);
     }
   }
 };
@@ -52,8 +65,18 @@ export default {
   box-sizing: border-box;
 }
 
-.select {
+/* Estilo predeterminado */
+.span-default {
   color: #ccc;
+}
+
+/* Estilo cuando se selecciona una opción */
+.span-selected {
+  color: #000;
+}
+
+.select {
+  min-width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -65,6 +88,7 @@ export default {
 }
 
 .flecha {
+  margin-left: 10px;
   width: 0;
   height: 0;
   border-left: 5px solid transparent;
@@ -81,14 +105,14 @@ export default {
   list-style: none;
   padding: 1px 2px;
   background: #fff;
-  color: #ccc;
+  color: black;
   border: 1px #ccc solid;
   box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   position: absolute;
   top: 3em;
   left: 50%;
-  width: 100%;
+  min-width: 100%;
   transform: translateX(-50%);
   opacity: 0;
   display: none;
@@ -103,12 +127,8 @@ export default {
   cursor: pointer;
 }
 
-.menu-servicio li:hover {
-  background: #b8b8b8;
-}
-
-.active {
-  background: #ccc;
+.menu-servicio-open li:hover {
+  background: #DCDCDCDC;
 }
 
 .menu-servicio-open {

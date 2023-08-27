@@ -134,7 +134,7 @@
                         <canvas ref="canvas" width="100" height="100" style="display: none;"></canvas>
                         <img v-if="imagenPrevia" :src="imagenPrevia" alt="Previsualización de la imagen">
                       </div>
-                      <button @click="showModal = false" class="modal-buttom" type="button">
+                      <button @click="showModal = false" class="modalButtom" type="button">
                         <span class="texto">Listo</span>
                       </button>
                     </div>
@@ -336,9 +336,8 @@ export default {
   border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
-  cursor: pointer;
   position: relative;
-  width: 75px;
+  width: 125px;
   height: 25px;
   text-align: center;
   margin-top: 10px;
