@@ -1,10 +1,10 @@
 <template>
   <div class="despegable-servicio">
     <button type="button" class="select" @click="toggleMenu" :class="{ 'active': isMenuOpen }">
-      <span :class="selectedOption ? 'span-selected' : 'span-default'">{{ selectedOption || placeholder }}</span>
+      <span :class="selectedOption ? 'spanSelected' : 'spanDefault'">{{ selectedOption || placeholder }}</span>
       <span class="flecha" :class="{ 'flecha-rotate': isMenuOpen }"></span>
     </button>
-    <ul v-if="isMenuOpen" :class="{ 'menu-servicio-open': isMenuOpen}" class="menu-servicio">
+    <ul v-if="isMenuOpen" :class="{ 'menuServicioOpen': isMenuOpen}" class="menuServicio">
       <li v-for="(option, index) in options" :key="index" @click="selectOption(option)">
         {{ option }}
       </li>
@@ -65,13 +65,11 @@ export default {
   box-sizing: border-box;
 }
 
-/* Estilo predeterminado */
-.span-default {
+.spanDefault {
   color: #ccc;
 }
 
-/* Estilo cuando se selecciona una opción */
-.span-selected {
+.spanSelected {
   color: #000;
 }
 
@@ -101,7 +99,7 @@ export default {
   transform: rotate(180deg);
 }
 
-.menu-servicio {
+.menuServicio {
   list-style: none;
   padding: 1px 2px;
   background: #fff;
@@ -120,18 +118,18 @@ export default {
   z-index: 1;
 }
 
-.menu-servicio li {
+.menuServicio li {
   padding: 0.7em 0.5em;
   margin: 0.3em 0;
   border-radius: 0.5em;
   cursor: pointer;
 }
 
-.menu-servicio-open li:hover {
+.menuServicioOpen li:hover {
   background: #DCDCDCDC;
 }
 
-.menu-servicio-open {
+.menuServicioOpen {
   display: block;
   opacity: 1;
 }

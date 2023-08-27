@@ -72,32 +72,14 @@
     <div class="main w-[1800px] h-[1000px] bg-clipAzul p-6">
       <div class="border h-full border-cyan-600 rounded-md border-2 p-12 flex">
         <div class="card-insignias flex-col justify-center">
-          <div class="despegable-servicio mb-10">
-            <div class="select" @click="toggleDropdown('dropdownS')">
-              <span>KTaxi</span>
-              <div
-                :class="{ flecha: true, 'flecha-rotate': dropdowns.dropdownS }"
-              ></div>
-            </div>
-            <ul
-              :class="{
-                'menu-servicio': true,
-                'menu-servicio-open': dropdowns.dropdownS,
-              }"
-            >
-              <li>Servicio 1</li>
-              <li>Servicio 2</li>
-              <li>Servicio 3</li>
-              <li class="active">KTaxi</li>
-            </ul>
-          </div>
-          <div class="insigniasF">
+          <dropdown-menu :options="optionsF" class="w-[200px]"></dropdown-menu>
+
+          <div class="insigniasF mt-10">s
             <h3 class="text-2xl font-bold mb-4 text-center p-7">
               Insignias de Fidelización
             </h3>
-
-            <div v-for="insignia in fidelizacionInsignias" :key="insignia.id">
-              <div class="grid grid-cols-6 gap-3">
+            <div class="grid grid-cols-6 gap-4">
+              <div v-for="insignia in fidelizacionInsignias" :key="insignia.id">
                 <div class="insignia">
                   <img :src="insignia.imagenUrl" :alt="insignia.titulo" class="" />
                   <p class="text-xs text-center mt-2">
@@ -106,7 +88,7 @@
                 </div>
               </div>
             </div>
-            
+
           </div>
         </div>
         <div class="cont-f flex-col ml-10 justify-center">
@@ -160,6 +142,7 @@
 </template>
 
 <script>
+import DropdownMenu from "@/components/DropdownMenu.vue";
 import axios from "axios";
 import { Bar } from "vue-chartjs";
 import {
@@ -182,10 +165,11 @@ ChartJS.register(
 );
 
 export default {
-  components: { Bar },
+  components: { Bar, DropdownMenu },
   data() {
     return {
       insignias: [],
+      optionsF: ['Ktaxi'],
       chartData: {
         labels: ["Insignias Fidelización"],
         datasets: [
@@ -382,7 +366,7 @@ export default {
   align-items: center;
   flex-shrink: 0;
   border-radius: 10px;
-  border: 1px solid #202d8d;
+  border: 1px solid #202D8D;
 }
 
 .button-content {
@@ -391,86 +375,8 @@ export default {
 }
 
 .active-button {
-  background-color: #202d8d;
+  background-color: #202D8D;
   color: white;
-}
-
-.despegable-servicio {
-  width: 75px;
-  min-width: 15em;
-  position: relative;
-}
-
-.despegable-servicio * {
-  box-sizing: border-box;
-}
-
-.select {
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: 2px white solid;
-  border-radius: 10px;
-  padding: 8px 14px 8px 14px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.select:hover {
-  background: #1d2883;
-}
-
-.flecha {
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 6px solid #fff;
-  transition: 0.3s;
-}
-
-.flecha-rotate {
-  transform: rotate(180deg);
-}
-
-.menu-servicio {
-  list-style: none;
-  padding: 1px 2px;
-  background: #202d8d;
-  color: white;
-  border: 1px #ffffff solid;
-  box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-  position: absolute;
-  top: 3em;
-  left: 50%;
-  width: 100%;
-  transform: translateX(-50%);
-  opacity: 0;
-  display: none;
-  transition: 0.2s;
-  z-index: 1;
-}
-
-.menu-servicio li {
-  padding: 0.7em 0.5em;
-  margin: 0.3em 0;
-  border-radius: 0.5em;
-  cursor: pointer;
-}
-
-.menu-servicio li:hover {
-  background: #1d2883;
-}
-
-.active {
-  background: #202d8d;
-}
-
-.menu-servicio-open {
-  display: block;
-  opacity: 1;
 }
 
 .insigniasF {
@@ -487,7 +393,7 @@ export default {
 }
 
 .insigniasF p {
-  color: #6d6d6d;
+  color: #6D6D6D;
   text-align: center;
   font-family: Lato;
   font-style: normal;

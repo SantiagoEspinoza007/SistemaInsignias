@@ -76,9 +76,8 @@
             <h3 class="text-2xl font-bold mb-4 text-center p-7">
               Insignias de Usabilidad
             </h3>
-
-            <div v-for="insignia in usabilidadInsignias" :key="insignia.id">
-              <div class="grid grid-cols-6 gap-3">
+            <div class="grid grid-cols-6 gap-4">
+              <div v-for="insignia in usabilidadInsignias" :key="insignia.id">
                 <div class="insignia">
                   <img
                     :src="insignia.imagenUrl"

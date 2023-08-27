@@ -30,7 +30,7 @@
       </tr>
       </tbody>
     </table>
-    <div class="paginacion">
+    <div class="paginacion1">
       <button v-if="paginaActual > 1" @click="paginaActual--;">Anterior Pagina</button>
       <span>{{ paginaActual }}</span>
       <button v-if="paginaActual < paginas" @click="paginaActual++;">Siguiente Pagina</button>
@@ -122,14 +122,14 @@ export default {
   text-align: left;
 }
 
-.paginacion {
+.paginacion1 {
   color: #cccccc;
   display: flex;
   justify-content: space-between;
 }
 
-.paginacion button {
-  color: #cccccc;
+.paginacion1 button {
+  color: #202D8D;
   margin-bottom: 20px;
   background-color: white;
   border: 2px solid #ccc;
