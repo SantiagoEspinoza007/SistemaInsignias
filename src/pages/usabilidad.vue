@@ -3,16 +3,18 @@
     <!--  Side Bar -->
     <div class="sideBar w-[400px] h-[1000px]">
       <div class="logo">
-        <img src="../img/Clipp.png">
-        <img src="../img/LogoClipp.png">
+        <img src="../img/Clipp.png" />
+        <img src="../img/LogoClipp.png" />
       </div>
       <div class="menu">
         <ul>
           <li>
             <router-link to="/">
-              <button :class="['button', { 'active-button': currentPage === '/' }]">
+              <button
+                :class="['button', { 'active-button': currentPage === '/' }]"
+              >
                 <div class="button-content">
-                  <img src="../img/home-b.svg" alt="Inicio">
+                  <img src="../img/home-b.svg" alt="Inicio" />
                   <span>Inicio</span>
                 </div>
               </button>
@@ -20,9 +22,14 @@
           </li>
           <li>
             <router-link to="/fidelizacion">
-              <button :class="['button', { 'active-button': currentPage === '/fidelizacion' }]">
+              <button
+                :class="[
+                  'button',
+                  { 'active-button': currentPage === '/fidelizacion' },
+                ]"
+              >
                 <div class="button-content">
-                  <img src="../img/Fidelizacion-b.svg" alt="Fidelizacion">
+                  <img src="../img/Fidelizacion-b.svg" alt="Fidelizacion" />
                   <span>Fidelización</span>
                 </div>
               </button>
@@ -30,9 +37,14 @@
           </li>
           <li>
             <router-link to="/usabilidad">
-              <button :class="['button', { 'active-button': currentPage === '/usabilidad' }]">
+              <button
+                :class="[
+                  'button',
+                  { 'active-button': currentPage === '/usabilidad' },
+                ]"
+              >
                 <div class="button-content">
-                  <img src="../img/Usabilidad-w.svg" alt="Usabilidad">
+                  <img src="../img/Usabilidad-w.svg" alt="Usabilidad" />
                   <span>Usabilidad</span>
                 </div>
               </button>
@@ -40,9 +52,14 @@
           </li>
           <li class="absolute bottom-0">
             <router-link to="/insignias">
-              <button :class="['button', { 'active-button': currentPage === '/insignias' }]">
+              <button
+                :class="[
+                  'button',
+                  { 'active-button': currentPage === '/insignias' },
+                ]"
+              >
                 <div class="button-content">
-                  <img src="../img/upload-b.svg" alt="Insignias">
+                  <img src="../img/upload-b.svg" alt="Insignias" />
                   <span>Cargar</span>
                 </div>
               </button>
@@ -53,35 +70,24 @@
     </div>
     <!--  Main  -->
     <div class="main w-[1800px] h-[1000px] bg-clipAzul p-6">
-      <div class="border h-full border-cyan-600 rounded-md border-2 p-12 flex ">
+      <div class="border h-full border-cyan-600 rounded-md border-2 p-12 flex">
         <div class="card-insignias flex-col justify-center">
           <div class="insigniasU mt-20">
-            <h3 class="text-2xl font-bold mb-4 text-center p-7">Insignias de Usabilidad</h3>
-            <div v-for="index in 3" :key="index">
+            <h3 class="text-2xl font-bold mb-4 text-center p-7">
+              Insignias de Usabilidad
+            </h3>
+
+            <div v-for="insignia in usabilidadInsignias" :key="insignia.id">
               <div class="grid grid-cols-6 gap-3">
                 <div class="insignia">
-                  <img src="../img/numCelular.png" alt="validar celular" class="">
-                  <p class="text-xs text-center mt-2">Validar número celular</p>
-                </div>
-                <div class="insignia">
-                  <img src="../img/tarjetaDebito.png" alt="tarjeta credito/debito">
-                  <p class="text-xs text-center mt-2">Agregar tarjeta crédito/debito</p>
-                </div>
-                <div class="insignia">
-                  <img src="../img/numCelular.png" alt="validar celular">
-                  <p class="text-xs text-center mt-2">Descripcion Actividad</p>
-                </div>
-                <div class="insignia">
-                  <img src="../img/tarjetaDebito.png" alt="tarjeta credito/debito">
-                  <p class="text-xs text-center mt-2">Descripcion Actividad</p>
-                </div>
-                <div class="insignia">
-                  <img src="../img/numCelular.png" alt="validar celular">
-                  <p class="text-xs text-center mt-2">Descripcion Actividad</p>
-                </div>
-                <div class="insignia">
-                  <img src="../img/tarjetaDebito.png" alt="tarjeta credito/debito">
-                  <p class="text-xs text-center mt-2">Descripcion Actividad</p>
+                  <img
+                    :src="insignia.imagenUrl"
+                    :alt="insignia.titulo"
+                    class=""
+                  />
+                  <p class="text-xs text-center mt-2">
+                    {{ insignia.descripcion }}
+                  </p>
                 </div>
               </div>
             </div>
@@ -91,9 +97,19 @@
           <div class="despegable-FFC w-40 mb-10">
             <div class="select-DSC" @click="toggleDropdown('dropdownFFC')">
               <span>Fecha</span>
-              <div :class="{'flecha-DSC': true, 'flecha-rotate-DSC': dropdowns.dropdownFFC}"></div>
+              <div
+                :class="{
+                  'flecha-DSC': true,
+                  'flecha-rotate-DSC': dropdowns.dropdownFFC,
+                }"
+              ></div>
             </div>
-            <ul :class="{'menu-DSC': true, 'menu-DSC-open': dropdowns.dropdownFFC}">
+            <ul
+              :class="{
+                'menu-DSC': true,
+                'menu-DSC-open': dropdowns.dropdownFFC,
+              }"
+            >
               <li class="active-DSC">Fecha 1</li>
               <li>Fecha 2</li>
               <li>Fecha 2</li>
@@ -101,24 +117,22 @@
             </ul>
           </div>
           <div class="FchartCard text-gray-600 mb-10">
-            <Bar
-                ref="myChart"
-                :options="chartOptions"
-                :data="chartData"
-            />
+            <Bar ref="myChart" :options="chartOptions" :data="chartData" />
           </div>
-          <table class="table-auto bg-white rounded-md ">
+          <table class="table-auto bg-white rounded-md">
             <thead>
-            <tr>
-              <th class="px-8 py-2 text-sm">Insiginias usabilidad</th>
-              <th class="px-4 py-2 text-sm">Cantidad usuarios</th>
-            </tr>
+              <tr>
+                <th class="px-8 py-2 text-sm">Insiginias usabilidad</th>
+                <th class="px-4 py-2 text-sm">Cantidad usuarios</th>
+              </tr>
             </thead>
             <tbody>
-            <tr v-for="user in users" :key="user.id">
-              <td class="border px-8 py-2">{{ user.Insignias_Usabilidad }}</td>
-              <td class="border px-4 py-2">{{ user.Cantidad_Usuarios }}</td>
-            </tr>
+              <tr v-for="user in users" :key="user.id">
+                <td class="border px-8 py-2">
+                  {{ user.Insignias_Usabilidad }}
+                </td>
+                <td class="border px-4 py-2">{{ user.Cantidad_Usuarios }}</td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -128,53 +142,67 @@
 </template>
 
 <script>
-import {Bar} from 'vue-chartjs'
-import {Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale} from 'chart.js'
+import axios from "axios";
 
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+import { Bar } from "vue-chartjs";
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+} from "chart.js";
+
+ChartJS.register(
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale
+);
 
 export default {
-  components: {Bar},
+  components: { Bar },
   data() {
     return {
+      insignias: [],
       chartData: {
-        labels: [
-          'Insignias Fidelización',
-        ],
+        labels: ["Insignias Fidelización"],
         datasets: [
           {
-            label: '20 Viajes',
+            label: "20 Viajes",
             data: [15],
             fill: false,
-            backgroundColor:
-                'rgba(255, 99, 132, 0.4)',
-            borderColor:
-                'rgb(255, 99, 132)',
+            backgroundColor: "rgba(255, 99, 132, 0.4)",
+            borderColor: "rgb(255, 99, 132)",
             borderWidth: 1,
           },
           {
-            label: 'Recomendar 1',
+            label: "Recomendar 1",
             data: [21],
             fill: false,
-            backgroundColor: 'rgba(75, 192, 192, 0.4)',
-            borderColor: 'rgb(75, 192, 192)',
+            backgroundColor: "rgba(75, 192, 192, 0.4)",
+            borderColor: "rgb(75, 192, 192)",
             borderWidth: 1,
           },
           {
-            label: '60km',
+            label: "60km",
             data: [15],
             fill: false,
-            backgroundColor: 'rgba(54, 162, 235, 0.4)',
-            borderColor: 'rgb(54, 162, 235)',
+            backgroundColor: "rgba(54, 162, 235, 0.4)",
+            borderColor: "rgb(54, 162, 235)",
             barPercentage: 0.8,
             borderWidth: 1,
           },
           {
-            label: '100km',
+            label: "100km",
             data: [20],
             fill: false,
-            backgroundColor: 'rgba(153, 102, 255, 0.4)',
-            borderColor: 'rgb(153, 102, 255)',
+            backgroundColor: "rgba(153, 102, 255, 0.4)",
+            borderColor: "rgb(153, 102, 255)",
             barPercentage: 0.8,
             borderWidth: 1,
           },
@@ -182,16 +210,16 @@ export default {
       },
       chartOptions: {
         responsive: true,
-        indexAxis: 'y',
+        indexAxis: "y",
         plugins: {
           title: {
             fontSize: 25,
             display: true,
-            text: 'Insignias usabilidad más conseguidas por los usuarios',
+            text: "Insignias usabilidad más conseguidas por los usuarios",
           },
           legend: {
             display: true,
-            position: 'bottom',
+            position: "bottom",
             labels: {
               usePointStyle: true,
             },
@@ -205,28 +233,41 @@ export default {
           },
         },
       },
-      currentPage: '',
+      currentPage: "",
       dropdowns: {
         dropdownSC: false,
         dropdownFFC: false,
         dropdownS: false,
       },
       users: [
-        {Insignias_Usabilidad: 'Nombre Insignia', Cantidad_Usuarios: 10},
-        {Insignias_Usabilidad: 'Nombre Insignia', Cantidad_Usuarios: 5},
-        {Insignias_Usabilidad: 'Nombre Insignia', Cantidad_Usuarios: 15},
-        {Insignias_Usabilidad: 'Nombre Insignia', Cantidad_Usuarios: 2},
+        { Insignias_Usabilidad: "Nombre Insignia", Cantidad_Usuarios: 10 },
+        { Insignias_Usabilidad: "Nombre Insignia", Cantidad_Usuarios: 5 },
+        { Insignias_Usabilidad: "Nombre Insignia", Cantidad_Usuarios: 15 },
+        { Insignias_Usabilidad: "Nombre Insignia", Cantidad_Usuarios: 2 },
       ],
       showModal: false,
       showModal2: false,
       cupones: [
-        {num: 1, cupon: 20},
-        {num: 2, cupon: 0},
-        {num: 3, cupon: 20},
+        { num: 1, cupon: 20 },
+        { num: 2, cupon: 0 },
+        { num: 3, cupon: 20 },
       ],
     };
   },
+  computed: {
+    usabilidadInsignias() {
+      return this.insignias.filter(
+        (insignia) => insignia.tipo === "usabilidad"
+      );
+    },
+  },
   mounted() {
+    const apiUrl =
+      "https://backend-clipp-production.up.railway.app/api/insignias";
+
+    axios.get(apiUrl).then((response) => {
+      this.insignias = response.data;
+    });
     this.currentPage = this.$route.path;
   },
   methods: {
@@ -254,7 +295,7 @@ export default {
   object-fit: contain;
 }
 
-.menu{
+.menu {
   padding-top: 20px;
 }
 
@@ -268,11 +309,11 @@ export default {
   margin-bottom: 30px;
 }
 
-.button img{
+.button img {
   margin-right: 10px;
 }
 
-.button{
+.button {
   display: flex;
   justify-content: center;
   width: 230px;
@@ -281,7 +322,7 @@ export default {
   align-items: center;
   flex-shrink: 0;
   border-radius: 10px;
-  border: 1px solid #202D8D;
+  border: 1px solid #202d8d;
 }
 
 .button-content {
@@ -303,7 +344,7 @@ export default {
 }
 
 .insigniasU p {
-  color: #6D6D6D;
+  color: #6d6d6d;
   text-align: center;
   font-family: Lato;
   font-style: normal;
