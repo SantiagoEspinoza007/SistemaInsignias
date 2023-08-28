@@ -74,7 +74,7 @@
         <div class="card-insignias flex-col justify-center">
           <dropdown-menu :options="optionsF" class="w-[200px]"></dropdown-menu>
 
-          <div class="insigniasF mt-10">s
+          <div class="insigniasF mt-10">
             <h3 class="text-2xl font-bold mb-4 text-center p-7">
               Insignias de Fidelización
             </h3>

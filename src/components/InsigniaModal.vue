@@ -15,7 +15,7 @@
       <p class="mb-4 font-extrabold">Buscar Actividad</p>
       <!-- Barra de búsqueda -->
       <div class="search-bar justify-center w-[500px]">
-        <input type="text" v-model="busqueda">
+        <input type="text" v-model="busqueda" placeholder="Ingrese el titulo de la actividad">
       </div>
       <div class="table-Modal flex flex-col">
         <table id="tabla" class="table-auto rounded-md bg-white mb-4">
@@ -33,16 +33,16 @@
               @dblclick="enviarTexto(insignia), showModal = false"
           >
             <td class="hidden border px-8 py-2">{{ insignia.id }}</td>
-            <td class="titulo border px-8 py-2">{{ insignia.titulo }}</td>
-            <td class="border px-8 py-2">{{ insignia.cantidad }}</td>
+            <td class="titulo border px-8 py-2">{{ insignia.nombre }}</td>
+            <td class="border px-8 py-2">{{ insignia.total }}</td>
             <td class="border px-8 py-2">{{ insignia.descripcion }}</td>
           </tr>
           </tbody>
         </table>
         <div class="paginacion">
-          <button v-if="paginaActual > 1" @click="paginaActual--;">Anterior Pagina</button>
+          <button type="button" v-if="paginaActual > 1" @click="paginaActual--;">Anterior Pagina</button>
           <span>{{ paginaActual }}</span>
-          <button v-if="paginaActual < paginas" @click="paginaActual++;">Siguiente Pagina</button>
+          <button type="button" v-if="paginaActual < paginas" @click="paginaActual++;">Siguiente Pagina</button>
         </div>
       </div>
       <button @click="showModal=false" class="modalButtom" type="button">
@@ -54,6 +54,7 @@
 
 <script>
 import FormInsignias from "@/components/FormInsignias.vue";
+import axios, {Axios} from "axios";
 
 export default {
   components: {
@@ -68,14 +69,7 @@ export default {
   data() {
     return {
       showModal: false,
-      listaInsignias: [
-        {id: 1, titulo: 'titulo1', cantidad: 20, descripcion: 'Prueba'},
-        {id: 2, titulo: 'titulo2', cantidad: 21, descripcion: 'Prueba2'},
-        {id: 3, titulo: 'titulo3', cantidad: 22, descripcion: 'Prueba3'},
-        {id: 1, titulo: 'titulo1', cantidad: 20, descripcion: 'Prueba'},
-        {id: 2, titulo: 'titulo2', cantidad: 21, descripcion: 'Prueba2'},
-        {id: 3, titulo: 'titulo3', cantidad: 22, descripcion: 'Prueba3'},
-      ],
+      listaInsignias: [],
       busqueda: '',
       paginaActual: 1,
       elementosPorPagina: 4,
@@ -84,15 +78,15 @@ export default {
       itemsPaginaActual: [],
       modalVisible: false,
       actividad: '',
+      actividadTitulo: '',
     };
   },
   computed: {
     filtrarInsignias() {
       const busqueda = this.busqueda.toLowerCase();
       return this.listaInsignias.filter(insignia =>
-          insignia.titulo.toLowerCase().includes(busqueda) ||
-          insignia.cantidad.toString().includes(busqueda) ||
-          insignia.descripcion.toLowerCase().includes(busqueda)
+          insignia.id.toString().includes(busqueda) ||
+          insignia.nombre.toLowerCase().includes(busqueda)
       );
     },
     totalPaginas() {
@@ -115,11 +109,19 @@ export default {
     },
   },
   mounted() {
-    this.paginas = this.totalPaginas;
+    axios.get("https://backend-clipp-production.up.railway.app/api/actividades")
+        .then((response) => {
+          // Actualiza la lista de insignias con los datos obtenidos del backend
+          this.listaInsignias = response.data;
+          this.paginas = this.totalPaginas;
+        })
+        .catch((error) => {
+          console.error("Error al obtener la lista de actividades:", error);
+        });
   },
   methods: {
     enviarTexto(fila) {
-      this.actividad = fila.titulo;
+      this.actividad = fila.id;
       this.$emit("enviarActividad", this.actividad);
     },
   },

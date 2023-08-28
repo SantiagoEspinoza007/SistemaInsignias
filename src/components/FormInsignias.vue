@@ -4,21 +4,32 @@
     <div class="contenido flex">
       <div class="insignias-labels mt-4">
         <h4 class="mb-6">Título</h4>
-        <h4 class="mb-6">Tipo</h4>
+        <h4 class="mb-8 ">Descripción</h4>
+        <h4 class="mb-8">Tipo/Servicio</h4>
         <h4 class="mb-6">Actividad</h4>
-        <h4 class="mb-6">Servicio</h4>
         <h4 class="mb-6">Imágen</h4>
       </div>
       <div class="insignias-inputs w-[75%] mb-4">
         <input class="input-global" id="titulo" v-model="titulo" type="text" placeholder="Nombre de la insignia">
-        <DropdownMenu :options="optionsTipo"
-                      class="despegable-global w-[75%]"
-                      id="tipo"
-                      v-model="tipo"
-                      placeholder="Elige el tipo de insignia al que pertenece"
-                      @option-selected="updateTipo"
-        />
-        <div class="actividad flex">
+        <input class="input-global" type="text" id="descripcion" v-model="descripcion"
+               placeholder="Descripción de la insignia">
+        <div class="menus flex">
+          <DropdownMenu :options="optionsTipo"
+                        class="despegable-global w-[35%]"
+                        id="tipo"
+                        v-model="tipo"
+                        placeholder="Tipo"
+                        @option-selected="updateTipo"
+          />
+          <DropdownMenu :options="optionsServicio"
+                        class="despegable-global w-[35%]"
+                        id="servicio"
+                        v-model="servicio"
+                        placeholder="Servicio"
+                        @option-selected="updateServicio"
+          />
+        </div>
+        <div class="actividad flex mt-2">
           <input class="input-global mr-4"
                  type="text"
                  id="actividad"
@@ -26,14 +37,8 @@
                  :readonly="bloquearInput"
                  placeholder="Busca la actividad">
 
-          <insignia-modal  :fila="actividad" @enviarActividad="actualizarActividad" />
+          <insignia-modal :fila="actividad" @enviarActividad="actualizarActividad"/>
         </div>
-        <DropdownMenu :options="optionsServicio"
-                      class="despegable-global w-[75%]"
-                      id="servicio"
-                      v-model="servicio"
-                      @option-selected="updateServicio"
-        />
         <div class="cargarImagen flex">
           <div class="view-Imagen justify-center">
             <canvas ref="canvas" width="100" height="100" style="display: none;"></canvas>
@@ -43,7 +48,8 @@
             <label class="upload-buttom">
               <img src="../img/upload-bk.svg" alt="upload" class="icono">
               <span>Cargar</span>
-              <input id="imagenPrevia" ref="imagenPreviaInput" type="file" style="display: none" accept="image/*" @change="previsualizarImagen($event)"/>
+              <input id="imagenPrevia" ref="imagenInput" type="file" style="display: none" accept="image/*"
+                     @change="previsualizarImagen($event)"/>
             </label>
           </div>
         </div>
@@ -71,38 +77,66 @@
 <script>
 import DropdownMenu from "@/components/DropdownMenu.vue";
 import InsigniaModal from "@/components/InsigniaModal.vue";
+import axios from "axios";
+import buscarActividad from "@/components/BuscarActividad.vue";
+
 export default {
   components: {
     DropdownMenu,
-    InsigniaModal
+    InsigniaModal,
+    buscarActividad
   },
   data() {
     return {
       titulo: '',
-      tipo: null,
-      actividad: '',
+      descripcion: '',
+      tipo: '',
+      actividad: null,
       servicio: null,
+      imagenUrl: '',
       imagen: null,
       imagenPrevia: null,
       optionsTipo: ['Fidelización', 'Usabilidad'],
       optionsServicio: ['KTaxi'],
       bloquearInput: true,
       showModal: false,
+      idInsignia: null,
     };
   },
   methods: {
     submitForm() {
-      // Aquí puedes realizar acciones con los datos del formulario,
-      // como enviar una solicitud HTTP, procesar datos, etc.
-      console.log("Datos del formulario:", this.titulo, this.cantidad, this.progreso);
+      // Crea un objeto con los datos del formulario
+      console.log("Datos del formulario:", this.titulo,
+          this.descripcion, this.imagenUrl, this.tipo ,this.actividad);
 
-      // Luego, puedes restablecer los datos del formulario si es necesario.
-      this.titulo = "";
-      this.tipo = "";
-      this.actividad = "";
-      this.servicio = "";
-      this.imagen = null;
-      this.imagenPrevia = null;
+      const formData = new FormData();
+      formData.append('titulo', this.titulo);
+      formData.append('descripcion', this.descripcion);
+      formData.append('imagenUrl', this.$refs.imagenInput.files[0]);
+      formData.append('tipo', this.tipo.toLowerCase());
+      formData.append('actividadId', Number(this.actividad));
+
+
+      console.log(formData)
+
+      // Realiza una solicitud POST al backend para crear el registro de insignia
+      axios
+          .post("https://backend-clipp-production.up.railway.app/api/insignias", formData)
+          .then((response) => {
+            // Maneja la respuesta del backend, por ejemplo, muestra un mensaje de éxito
+            console.log("Registro de insignia creado con éxito:", response.data);
+
+            // Luego, puedes restablecer los datos del formulario si es necesario.
+            this.titulo = "";
+            this.descripcion = "";
+            this.imagenPrevia = null;
+            this.tipo = "";
+            this.actividad = null;
+          })
+          .catch((error) => {
+            console.error("Error al crear el registro de insignia:", error);
+            // Maneja el error de acuerdo a tus necesidades.
+          });
     },
     openModal() {
       this.showModal = true; // Abre el modal cuando se hace clic en el botón
@@ -132,9 +166,10 @@ export default {
       } else {
         this.imagenPrevia = null;
       }
-      const archivoInputValue = this.$refs.imagenPreviaInput.value;
+      const archivoInputValue = this.$refs.imagenInput.value;
       // Agregar console.log para verificar las propiedades
       console.log("titulo:", this.titulo);
+      console.log("descripcion:", this.descripcion);
       console.log("tipo:", this.tipo);
       console.log("actividad:", this.actividad);
       console.log("servicio:", this.servicio);
@@ -154,9 +189,9 @@ export default {
     formularioCompleto() {
       return (
           (this.titulo === undefined || this.titulo.trim() !== '') &&
+          (this.descripcion === undefined || this.descripcion.trim() !== '') &&
           (this.tipo !== null) &&
-          (this.actividad === undefined || this.actividad.trim() !== '') &&
-          (this.servicio !== null) &&
+          (this.actividad !== null) &&
           (this.imagenPrevia !== null)
       );
     }

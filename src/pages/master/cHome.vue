@@ -1,5 +1,5 @@
 <template>
-  <div class="layout w-screen h-screen flex">
+  <div class="layout w-screen h-[1000px] flex">
     <!--  Side Bar -->
     <div class="sideBar w-[400px] h-[1000px]">
       <div class="logo">
@@ -365,8 +365,6 @@ export default {
         {id: 2, KTaxi: 0, Delivery: 0, otro: 0, TotalI_Obtenidas: 0, TotalB_Obtenidos: 0},
         {id: 3, KTaxi: 20, Delivery: 10, otro: 0, TotalI_Obtenidas: 0, TotalB_Obtenidos: 0},
       ],
-      showModal: false,
-      showModal2: false,
       cupones: [
         {num: 1, cupon: 20},
         {num: 2, cupon: 0},

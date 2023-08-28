@@ -1,10 +1,20 @@
 <template class="data-table">
   <!-- Barra de búsqueda -->
   <div class="search-bar justify-center">
-    <input type="text" v-model="busqueda">
+    <input type="text" v-model="busqueda" placeholder="Ingrese el titulo de la Insignia">
     <div class="despegables flex gap-1">
-      <DropdownMenu :options="servicioOptions" class="despegable-global" placeholder="Todos los servicios" />
-      <DropdownMenu :options="tipoInsigniaOptions" class="despegable-global" placeholder="Tipo de insignia"/>
+      <DropdownMenuW :options="servicioOptions"
+                    class="despegable-global"
+                    placeholder="Todos los servicios"
+      />
+      <DropdownMenuW v-model="tipoInsigniaSeleccionada"
+                    :options="tipoInsigniaOptions"
+                    id="tipoInsigniaSeleccionada"
+                    class="despegable-global"
+                    placeholder="Tipo de insignia"
+                    @option-selected="updateTipo"
+      />
+
     </div>
   </div>
   <div class="tableInsignias flex flex-col">
@@ -12,47 +22,54 @@
       <thead>
       <tr>
         <th class="hidden">ID</th>
-        <th>Insignias Cargadas</th>
+        <th>Insignia</th>
+        <th>Titulo</th>
         <th>Tipo</th>
         <th>Actividad Asignada</th>
         <th>Cantidad</th>
       </tr>
       </thead>
       <tbody>
-      <tr v-for="(item, index) in itemsPaginaActual"
+      <tr v-for="(item, index) in itemsPaginaActual1"
           :key="index"
-          @dblclick="enviarItem(item)">
+          @dblclick="enviarItem(item)"
+      >
         <td class="hidden">{{ item.id }}</td>
-        <td class="border px-8 py-2">{{ item.insignias }}</td>
+        <td class="border px-8">
+          <img :src="item.imagenUrl" alt="Insignia" width="45" height="45">
+        </td>
+        <td class="border px-8 py-2">{{ item.titulo }}</td>
         <td class="border px-8 py-2">{{ item.tipo }}</td>
-        <td class="border px-8 py-2">{{ item.actividad }}</td>
-        <td class="border px-8 py-2">{{ item.cantidad }}</td>
+        <td class="border px-8 py-2">{{ item.actividad.nombre }}</td>
+        <td class="border px-8 py-2">{{ item.actividad.total }}</td>
       </tr>
       </tbody>
     </table>
     <div class="paginacion1">
-      <button v-if="paginaActual > 1" @click="paginaActual--;">Anterior Pagina</button>
-      <span>{{ paginaActual }}</span>
-      <button v-if="paginaActual < paginas" @click="paginaActual++;">Siguiente Pagina</button>
+      <button v-if="paginaActual1 > 1" @click="paginaActual1--;">Anterior Pagina</button>
+      <button v-if="paginaActual1 < paginas1" @click="paginaActual1++;">Siguiente Pagina</button>
     </div>
   </div>
 </template>
 <script>
-import DropdownMenu from "@/components/DropdownMenu.vue";
+import DropdownMenuW from "@/components/DropdownMenuW.vue";
+import axios from "axios";
 
 export default {
-  components: {DropdownMenu},
+  components: {DropdownMenuW},
   data() {
     return{
       busqueda: '',
       servicioOptions: ['KTaxi'],
-      tipoInsigniaOptions: ['Fidelizacion', 'Usabilidad'],
+      tipoInsigniaOptions: ['fidelización', 'usabilidad'],
+      tipoInsigniaSeleccionada: '',
       insignia: '',
-      paginaActual: 1,
-      elementosPorPagina: 5,
-      totalItems: 9,
-      paginas: 0,
-      itemsPaginaActual: [],
+      paginaActual1: 1,
+      elementosPorPagina1: 4,
+      totalItems1: [],
+      paginas1: 0,
+      itemsPaginaActual1: [],
+      tableOptions: [],
     }
   },
   props: {
@@ -67,44 +84,55 @@ export default {
   },
   methods: {
     cambiarPagina(numeroPagina) {
-      this.paginaActual = numeroPagina;
+      this.paginaActual1 = numeroPagina;
     },
     enviarItem(fila) {
-      this.actividad = fila;
-      this.$emit("enviarActividad", this.actividad);
+      this.$emit("enviarActividad", fila.id);
+    },
+    updateTipo(option) {
+      this.tipoInsigniaSeleccionada = option.toLowerCase();
     },
   },
+
   computed: {
     filtrarItems() {
       const busqueda = this.busqueda.toLowerCase();
-      return this.options.filter(item =>
-          item.tipo.toLowerCase().includes(busqueda) ||
-          item.actividad.toLowerCase().includes(busqueda) ||
-          item.cantidad.toString().includes(busqueda)
+      // console.log("Busqueda:", busqueda);
+      // console.log("TipoInsigniaSeleccionada:", this.tipoInsigniaSeleccionada);
+      return this.tableOptions.filter(item =>
+          (item.titulo.toLowerCase().includes(busqueda) || busqueda === '') &&
+          (this.tipoInsigniaSeleccionada === '' || item.tipo === this.tipoInsigniaSeleccionada)
       );
     },
-    totalPaginas() {
-      return Math.ceil(this.filtrarItems.length / this.elementosPorPagina);
+    totalPaginas1() {
+      return Math.ceil(this.filtrarItems.length / this.elementosPorPagina1);
     },
     // Calcular el índice del último elemento en la página actual
-    ultimoIndicePagina() {
-      return this.paginaActual * this.elementosPorPagina;
+    ultimoIndicePagina1() {
+      return this.paginaActual1 * this.elementosPorPagina1;
     },
     // Calcular el índice del primer elemento en la página actual
-    primerIndicePagina() {
-      return this.ultimoIndicePagina - this.elementosPorPagina;
+    primerIndicePagina1() {
+      return this.ultimoIndicePagina1 - this.elementosPorPagina1;
     },
     // Obtener los elementos de la página actual
-    itemsPaginaActual() {
-      return this.filtrarItems.slice(this.primerIndicePagina, this.ultimoIndicePagina);
+    itemsPaginaActual1() {
+      return this.filtrarItems.slice(this.primerIndicePagina1, this.ultimoIndicePagina1);
     },
     // Obtener el total de elementos después de la búsqueda
-    totalItems() {
+    totalItems1() {
       return this.filtrarItems.length;
     }
   },
   mounted() {
-    this.paginas = this.totalPaginas;
+    axios.get("https://backend-clipp-production.up.railway.app/api/insignias")
+        .then((response) => {
+          this.tableOptions = response.data;
+          this.paginas1 = this.totalPaginas1;
+        })
+        .catch((error) =>{
+          console.error("Error al obtener las insignias: ", error)
+        });
   },
 };
 </script>

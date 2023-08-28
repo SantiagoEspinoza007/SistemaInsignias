@@ -1,11 +1,10 @@
 <template>
-  <button type="button"
-          class="button-Cupones w-[200px] text-[#202D8D]"
+  <button class="buscarButton"
+          type="button"
           @click="showModal = true"
->
-    <span>Ver Cupones</span>
+  >
+    Buscar
   </button>
-
   <transition name="fade">
     <div class="modal-overlay" v-if="showModal">
     </div>
@@ -13,41 +12,37 @@
 
   <transition name="fade">
     <div class="modal" v-if="showModal">
-      <p class="mb-4 font-extrabold">Buscar Cupón</p>
+      <p class="mb-4 font-extrabold">Buscar Actividad</p>
       <!-- Barra de búsqueda -->
-      <div class="search-bar justify-center w-[700px]">
-        <input type="text" v-model="busqueda" placeholder="Ingrese la descripción del cupón">
+      <div class="search-bar justify-center w-[500px]">
+        <input type="text" v-model="busqueda" placeholder="Ingrese el titulo de la actividad">
       </div>
       <div class="table-Modal flex flex-col">
         <table id="tabla" class="table-auto rounded-md bg-white mb-4">
           <thead>
           <tr>
             <th class="hidden px-8 py-2">ID</th>
-            <th class="px-8 py-2">%</th>
+            <th class="px-8 py-2">Titulo</th>
+            <th class="px-8 py-2">Cantidad</th>
             <th class="px-8 py-2">Descripción</th>
-            <th class="px-8 py-2">Fecha</th>
-            <th class="px-8 py-2">Imágen</th>
           </tr>
           </thead>
           <tbody>
-          <tr v-for="(beneficio, index) in itemsPaginaActual"
+          <tr v-for="(actividad, index) in itemsPaginaActual"
               :key="index"
-              @dblclick="enviarTexto(beneficio), showModal = false"
+              @dblclick="enviarTexto(actividad), showModal = false"
           >
-            <td class="hidden border px-8 py-2">{{ beneficio.id }}</td>
-            <td class="titulo border px-8 py-2">{{ beneficio.descuento }}</td>
-            <td class="border px-8 py-2">{{ beneficio.descripcion }}</td>
-            <td class="border px-8 py-2">{{ beneficio.fecha }}</td>
-            <td class="border px-8 py-2">
-              <img :src="beneficio.imagenUrl" alt="Insignia" width="45" height="45">
-            </td>
+            <td class="hidden border px-8 py-2">{{ actividad.id }}</td>
+            <td class="titulo border px-8 py-2">{{ actividad.nombre }}</td>
+            <td class="border px-8 py-2">{{ actividad.total }}</td>
+            <td class="border px-8 py-2">{{ actividad.descripcion }}</td>
           </tr>
           </tbody>
         </table>
         <div class="paginacion">
-          <button v-if="paginaActual > 1" @click="paginaActual--;">Anterior Pagina</button>
+          <button type="button" v-if="paginaActual > 1" @click="paginaActual--;">Anterior Pagina</button>
           <span>{{ paginaActual }}</span>
-          <button v-if="paginaActual < paginas" @click="paginaActual++;">Siguiente Pagina</button>
+          <button type="button" v-if="paginaActual < paginas" @click="paginaActual++;">Siguiente Pagina</button>
         </div>
       </div>
       <button @click="showModal=false" class="modalButtom" type="button">
@@ -59,16 +54,16 @@
 
 <script>
 import FormInsignias from "@/components/FormInsignias.vue";
-import axios from "axios";
+import axios, {Axios} from "axios";
+
 export default {
   components: {
     FormInsignias
   },
-
   data() {
     return {
       showModal: false,
-      listaBeneficios: [],
+      listaInsignias: [],
       busqueda: '',
       paginaActual: 1,
       elementosPorPagina: 4,
@@ -77,17 +72,19 @@ export default {
       itemsPaginaActual: [],
       modalVisible: false,
       actividad: '',
+      actividadTitulo: '',
     };
   },
   computed: {
-    filtrarBeneficios() {
+    filtrarInsignias() {
       const busqueda = this.busqueda.toLowerCase();
-      return this.listaBeneficios.filter(beneficio =>
-          beneficio.descripcion.toLowerCase().includes(busqueda)
+      return this.listaInsignias.filter(insignia =>
+          insignia.id.toString().includes(busqueda) ||
+          insignia.nombre.toLowerCase().includes(busqueda)
       );
     },
     totalPaginas() {
-      return Math.ceil(this.filtrarBeneficios.length / this.elementosPorPagina);
+      return Math.ceil(this.filtrarInsignias.length / this.elementosPorPagina);
     },
     // Calcular el índice del último elemento en la página actual
     ultimoIndicePagina() {
@@ -99,25 +96,26 @@ export default {
     },
     // Obtener el total de elementos después de la búsqueda
     totalItems() {
-      return this.filtrarBeneficios.length;
+      return this.filtrarInsignias.length;
     },
     itemsPaginaActual() {
-      return this.filtrarBeneficios.slice(this.primerIndicePagina, this.ultimoIndicePagina);
+      return this.filtrarInsignias.slice(this.primerIndicePagina, this.ultimoIndicePagina);
     },
   },
   mounted() {
-    axios.get("https://backend-clipp-production.up.railway.app/api/beneficios")
+    axios.get("https://backend-clipp-production.up.railway.app/api/actividades")
         .then((response) => {
-          this.listaBeneficios = response.data
+          // Actualiza la lista de insignias con los datos obtenidos del backend
+          this.listaInsignias = response.data;
           this.paginas = this.totalPaginas;
         })
         .catch((error) => {
-          console.error("Error al obtener la lista de beneficios: ", error);
+          console.error("Error al obtener la lista de actividades:", error);
         });
   },
   methods: {
-    enviarTexto(beneficio) {
-      this.$emit("enviarBeneficio", beneficio)
+    enviarTexto(actividad) {
+      this.$emit("enviarActividad", actividad);
       this.showModal = false;
     },
   },
@@ -126,6 +124,18 @@ export default {
 </script>
 
 <style>
+.buscarButton {
+  color: #2794F8;
+  margin-bottom: 12px;
+  background-color: white;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+  width: 100px;
+  height: 35px;
+}
+
 .modal-overlay {
   position: absolute;
   top: 0;

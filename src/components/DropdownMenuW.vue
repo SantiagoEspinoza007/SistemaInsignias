@@ -1,7 +1,7 @@
 <template>
   <div class="despegable-servicio">
     <button type="button" class="select" @click="toggleMenu" :class="{ 'active': isMenuOpen }">
-      <span :class="selectedOption ? 'spanSelected' : 'spanDefault'">{{ selectedOption || placeholder }}</span>
+      <span :class="selectedOption ? 'spanSelectedw' : 'spanDefaultw'">{{ selectedOption || placeholder }}</span>
       <span class="flecha" :class="{ 'flecha-rotate': isMenuOpen }"></span>
     </button>
     <ul v-if="isMenuOpen" :class="{ 'menuServicioOpen': isMenuOpen}" class="menuServicio">
@@ -24,7 +24,7 @@ export default {
       required: true
     },
     value: {
-      type: String,
+      type: String, // or the appropriate data type for your options
       default: null
     }
   },
@@ -65,12 +65,12 @@ export default {
   box-sizing: border-box;
 }
 
-.spanDefault {
+.spanDefaultw {
   color: #ccc;
 }
 
-.spanSelected {
-  color: #000;
+.spanSelectedw {
+  color: #ffffff;
 }
 
 .select {
@@ -80,7 +80,7 @@ export default {
   align-items: center;
   border: 2px #ccc solid;
   border-radius: 10px;
-  padding: 8px 8px 8px 8px;
+  padding: 8px 14px 8px 14px;
   cursor: pointer;
   transition: background 0.3s;
 }
