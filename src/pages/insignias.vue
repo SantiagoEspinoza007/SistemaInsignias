@@ -59,7 +59,7 @@
             <FormActividades></FormActividades>
           </div>
           <div class="form-insignias rounded-md bg-white w-[600px] p-2 mb-2">
-            <form-insignias></form-insignias>
+            <form-insignias :id="idInsignia"></form-insignias>
           </div>
 
           <form-publicidad></form-publicidad>
@@ -67,7 +67,7 @@
         </div>
         <div class="col-tablas ml-8">
           <div>
-            <TableUploadData class="data-table table-auto rounded-md bg-white mb-8"/>
+            <TableUploadData :id="idInsignia" @enviarInsignia="idInsignia" class="data-table table-auto rounded-md bg-white mb-8"/>
           </div>
 
           <form-cupones></form-cupones>
@@ -100,6 +100,7 @@ export default {
   },
   data() {
     return {
+      idInsignia: '',
       busqueda: '',
       paginaActual: 1,
       elementosPorPagina: 5,
@@ -179,8 +180,9 @@ export default {
         formulario.imagenPrevia = null;
       }
     },
-
-
+    idInsignia(id){
+      this.idInsignia(id);
+    }
   },
 
 };

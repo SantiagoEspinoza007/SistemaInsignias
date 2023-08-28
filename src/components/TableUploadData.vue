@@ -25,6 +25,7 @@
         <th>Insignia</th>
         <th>Titulo</th>
         <th>Tipo</th>
+        <th class="hidden">IDActividad</th>
         <th>Actividad Asignada</th>
         <th>Cantidad</th>
       </tr>
@@ -32,7 +33,7 @@
       <tbody>
       <tr v-for="(item, index) in itemsPaginaActual1"
           :key="index"
-          @dblclick="enviarItem(item)"
+          @dblclick="enviarItem(item.id)"
       >
         <td class="hidden">{{ item.id }}</td>
         <td class="border px-8">
@@ -40,6 +41,7 @@
         </td>
         <td class="border px-8 py-2">{{ item.titulo }}</td>
         <td class="border px-8 py-2">{{ item.tipo }}</td>
+        <td class="hidden">{{ item.actividad.id }}</td>
         <td class="border px-8 py-2">{{ item.actividad.nombre }}</td>
         <td class="border px-8 py-2">{{ item.actividad.total }}</td>
       </tr>
@@ -54,6 +56,8 @@
 <script>
 import DropdownMenuW from "@/components/DropdownMenuW.vue";
 import axios from "axios";
+import formInsignias from "@/components/FormInsignias.vue";
+
 
 export default {
   components: {DropdownMenuW},
@@ -77,6 +81,10 @@ export default {
       type: Array,
       required: true
     },
+    id: {
+      type: Number,
+      required: true,
+    },
     fila: {
       type: Object,
       required: true,
@@ -87,7 +95,12 @@ export default {
       this.paginaActual1 = numeroPagina;
     },
     enviarItem(fila) {
-      this.$emit("enviarActividad", fila.id);
+      const apiUrl =
+          `https://backend-clipp-production.up.railway.app/api/insignias/${fila}`;
+
+      axios.get(apiUrl).then((response) => {
+        this.$emit("enviarInsignia", response.data);
+      });
     },
     updateTipo(option) {
       this.tipoInsigniaSeleccionada = option.toLowerCase();

@@ -70,6 +70,11 @@
                 class="button-global text-[#2794F8]" type="submit">
           <span>Guardar</span>
         </button>
+        <button class="button-global text-[#2794F8]" type="submit"
+                @click="actualizarInsignia"
+        >
+          <span>Cargar</span>
+        </button>
       </div>
     </div>
   </form>
@@ -77,7 +82,7 @@
 <script>
 import DropdownMenu from "@/components/DropdownMenu.vue";
 import InsigniaModal from "@/components/InsigniaModal.vue";
-import axios from "axios";
+import axios, {options} from "axios";
 import buscarActividad from "@/components/BuscarActividad.vue";
 
 export default {
@@ -102,6 +107,12 @@ export default {
       showModal: false,
       idInsignia: null,
     };
+  },
+  props: {
+    id: {
+      type: Number,
+      required: true
+    },
   },
   methods: {
     submitForm() {
@@ -137,6 +148,23 @@ export default {
             console.error("Error al crear el registro de insignia:", error);
             // Maneja el error de acuerdo a tus necesidades.
           });
+    },
+    actualizarInsignia(insignia) {
+      this.idInsignia = insignia.id;
+
+      axios
+          .get(`https://backend-clipp-production.up.railway.app/api/insignias/${this.idInsignia}`
+          )
+          .then((response) => {
+            this.titulo = response.data.titulo
+            this.descripcion = response.data.descripcion;
+            this.tipo = response.data.tipo;
+            this.actividad = response.data.actividad.titulo;
+            this.imagenPrevia = response.data.imagenUrl;
+          })
+          .catch((error) => {
+            console.error("Error al obtener el beneficio:", error);
+          })
     },
     openModal() {
       this.showModal = true; // Abre el modal cuando se hace clic en el botón
@@ -196,7 +224,6 @@ export default {
       );
     }
   },
-
 };
 </script>
 
