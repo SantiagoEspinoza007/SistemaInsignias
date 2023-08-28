@@ -151,7 +151,7 @@ import ChartComponent from "../components/ChartComponent.vue";
 import axios from "axios";
 
 export default {
-  components: { Bar, DropdownMenu },
+  components: { ChartComponent },
   data() {
     return {
       users: [],
