@@ -116,12 +116,12 @@
             </ul>
           </div>
           <div class="FchartCard text-gray-600 mb-10">
-            <Bar ref="myChart" :options="chartOptions" :data="chartData" />
+            <ChartComponent2 />
           </div>
           <table class="table-auto bg-white rounded-md">
             <thead>
               <tr>
-                <th class="px-8 py-2 text-sm">Insiginias usabilidad</th>
+                <th class="px-8 py-2 text-sm">Insignias usabilidad</th>
                 <th class="px-4 py-2 text-sm">Cantidad usuarios</th>
               </tr>
             </thead>
@@ -142,108 +142,21 @@
 
 <script>
 import axios from "axios";
-
-import { Bar } from "vue-chartjs";
-import {
-  Chart as ChartJS,
-  Title,
-  Tooltip,
-  Legend,
-  BarElement,
-  CategoryScale,
-  LinearScale,
-} from "chart.js";
-
-ChartJS.register(
-  Title,
-  Tooltip,
-  Legend,
-  BarElement,
-  CategoryScale,
-  LinearScale
-);
-
+import ChartComponent2 from "../components/ChartComponent2.vue";
 export default {
-  components: { Bar },
+  components: {
+    ChartComponent2,
+  },
   data() {
     return {
       insignias: [],
-      chartData: {
-        labels: ["Insignias Fidelización"],
-        datasets: [
-          {
-            label: "20 Viajes",
-            data: [15],
-            fill: false,
-            backgroundColor: "rgba(255, 99, 132, 0.4)",
-            borderColor: "rgb(255, 99, 132)",
-            borderWidth: 1,
-          },
-          {
-            label: "Recomendar 1",
-            data: [21],
-            fill: false,
-            backgroundColor: "rgba(75, 192, 192, 0.4)",
-            borderColor: "rgb(75, 192, 192)",
-            borderWidth: 1,
-          },
-          {
-            label: "60km",
-            data: [15],
-            fill: false,
-            backgroundColor: "rgba(54, 162, 235, 0.4)",
-            borderColor: "rgb(54, 162, 235)",
-            barPercentage: 0.8,
-            borderWidth: 1,
-          },
-          {
-            label: "100km",
-            data: [20],
-            fill: false,
-            backgroundColor: "rgba(153, 102, 255, 0.4)",
-            borderColor: "rgb(153, 102, 255)",
-            barPercentage: 0.8,
-            borderWidth: 1,
-          },
-        ],
-      },
-      chartOptions: {
-        responsive: true,
-        indexAxis: "y",
-        plugins: {
-          title: {
-            fontSize: 25,
-            display: true,
-            text: "Insignias usabilidad más conseguidas por los usuarios",
-          },
-          legend: {
-            display: true,
-            position: "bottom",
-            labels: {
-              usePointStyle: true,
-            },
-          },
-        },
-        scales: {
-          y: {
-            ticks: {
-              display: false,
-            },
-          },
-        },
-      },
       currentPage: "",
       dropdowns: {
         dropdownSC: false,
         dropdownFFC: false,
         dropdownS: false,
       },
-      users: [
-        { Insignias_Usabilidad: "Nombre Insignia", Cantidad_Usuarios: 10 },
-        { Insignias_Usabilidad: "Nombre Insignia", Cantidad_Usuarios: 5 },
-        { Insignias_Usabilidad: "Nombre Insignia", Cantidad_Usuarios: 15 },
-        { Insignias_Usabilidad: "Nombre Insignia", Cantidad_Usuarios: 2 },
-      ],
+  
       showModal: false,
       showModal2: false,
       cupones: [
@@ -267,12 +180,22 @@ export default {
     axios.get(apiUrl).then((response) => {
       this.insignias = response.data;
     });
+    this.fetchUsabilityData();
     this.currentPage = this.$route.path;
+    
   },
   methods: {
     toggleDropdown(dropdown) {
       this.dropdowns[dropdown] = !this.dropdowns[dropdown];
     },
+    async fetchUsabilityData() {
+      try {
+        const response = await axios.get("https://backend-clipp-production.up.railway.app/api/consultas/tabla2");
+        this.users = response.data;
+      } catch (error) {
+        console.error(error);
+      }
+    }
   },
 };
 </script>

@@ -3,16 +3,18 @@
     <!--  Side Bar -->
     <div class="sideBar w-[400px] h-[1000px]">
       <div class="logo">
-        <img src="../../img/Clipp.png">
-        <img src="../../img/LogoClipp.png">
+        <img src="../../img/Clipp.png" />
+        <img src="../../img/LogoClipp.png" />
       </div>
       <div class="menu">
         <ul>
           <li>
             <router-link to="/">
-              <button :class="['button', { 'active-button': currentPage === '/' }]">
+              <button
+                :class="['button', { 'active-button': currentPage === '/' }]"
+              >
                 <div class="button-content">
-                  <img src="../../img/home-w.svg" alt="Inicio">
+                  <img src="../../img/home-w.svg" alt="Inicio" />
                   <span>Inicio</span>
                 </div>
               </button>
@@ -20,9 +22,14 @@
           </li>
           <li>
             <router-link to="/fidelizacion">
-              <button :class="['button', { 'active-button': currentPage === '/fidelizacion' }]">
+              <button
+                :class="[
+                  'button',
+                  { 'active-button': currentPage === '/fidelizacion' },
+                ]"
+              >
                 <div class="button-content">
-                  <img src="../../img/Fidelizacion-b.svg" alt="Fidelizacion">
+                  <img src="../../img/Fidelizacion-b.svg" alt="Fidelizacion" />
                   <span>Fidelización</span>
                 </div>
               </button>
@@ -30,9 +37,14 @@
           </li>
           <li>
             <router-link to="/usabilidad">
-              <button :class="['button', { 'active-button': currentPage === '/usabilidad' }]">
+              <button
+                :class="[
+                  'button',
+                  { 'active-button': currentPage === '/usabilidad' },
+                ]"
+              >
                 <div class="button-content">
-                  <img src="../../img/Usabilidad-b.svg" alt="Usabilidad">
+                  <img src="../../img/Usabilidad-b.svg" alt="Usabilidad" />
                   <span>Usabilidad</span>
                 </div>
               </button>
@@ -40,9 +52,14 @@
           </li>
           <li class="absolute bottom-0">
             <router-link to="/insignias">
-              <button :class="['button', { 'active-button': currentPage === '/insignias' }]">
+              <button
+                :class="[
+                  'button',
+                  { 'active-button': currentPage === '/insignias' },
+                ]"
+              >
                 <div class="button-content">
-                  <img src="../../img/upload-b.svg" alt="Insignias">
+                  <img src="../../img/upload-b.svg" alt="Insignias" />
                   <span>Cargar</span>
                 </div>
               </button>
@@ -56,33 +73,43 @@
       <div class="border h-full border-cyan-600 rounded-md border-2 p-4 flex">
         <div class="insigniasF-U ml-8 mb-4 space-y-4 flex-col">
           <div class="insignias mt-2">
-            <h3 class="text-2xl font-bold mb-4 text-center p-1">Insignias de Fidelización</h3>
+            <h3 class="text-2xl font-bold mb-4 text-center p-1">
+              Insignias de Fidelización
+            </h3>
             <p class="text-lg mb-2 text-center">TOP 5 más obtenidas</p>
             <div class="grid grid-cols-5">
               <div class="insignia">
                 <p class="text-base text-center m-1">Ktaxi</p>
-                <img src="../../img/20taxis.png" alt="20 Taxis" class="">
-                <p class="text-xs text-center mt-2">Has completado 20 viajes en Taxis</p>
+                <img src="../../img/20taxis.png" alt="20 Taxis" class="" />
+                <p class="text-xs text-center mt-2">
+                  Has completado 20 viajes en Taxis
+                </p>
               </div>
               <div class="insignia">
                 <p class="text-center text-base m-1">Delivery</p>
-                <img src="../../img/formaPago.png" alt="Forma de Pago">
-                <p class="text-xs text-center mt-2">Usaste una forma diferente de pago</p>
+                <img src="../../img/formaPago.png" alt="Forma de Pago" />
+                <p class="text-xs text-center mt-2">
+                  Usaste una forma diferente de pago
+                </p>
               </div>
               <div class="insignia">
                 <p class="text-base text-center m-1">Servicio</p>
-                <img src="../../img/30km.png" alt="30 Km">
-                <p class="text-xs text-center mt-2">Llegaste a 30 Km recorridos</p>
+                <img src="../../img/30km.png" alt="30 Km" />
+                <p class="text-xs text-center mt-2">
+                  Llegaste a 30 Km recorridos
+                </p>
               </div>
               <div class="insignia">
                 <p class="text-base text-center m-1">Servicio</p>
-                <img src="../../img/20taxis.png" alt="20 Taxis">
+                <img src="../../img/20taxis.png" alt="20 Taxis" />
                 <p class="text-xs text-center mt-2">Descripcion Actividad</p>
               </div>
               <div class="insignia">
                 <p class="text-base text-center m-1">Servicio</p>
-                <img src="../../img/30km.png" alt="30 Km">
-                <p class="text-xs text-center mt-2">Llegaste a 30 Km recorridos</p>
+                <img src="../../img/30km.png" alt="30 Km" />
+                <p class="text-xs text-center mt-2">
+                  Llegaste a 30 Km recorridos
+                </p>
               </div>
             </div>
             <router-link to="/fidelizacion" class="verInsignias">
@@ -92,27 +119,41 @@
             </router-link>
           </div>
           <div class="insignias mb-4">
-            <h3 class="text-2xl font-bold mb-4 text-center p-1">Insignias de Usabilidad</h3>
+            <h3 class="text-2xl font-bold mb-4 text-center p-1">
+              Insignias de Usabilidad
+            </h3>
             <p class="text-lg mb-2 text-center">TOP 5 más obtenidas</p>
             <div class="grid grid-cols-5">
               <div class="insignia">
-                <img src="../../img/numCelular.png" alt="validar celular" class="">
+                <img
+                  src="../../img/numCelular.png"
+                  alt="validar celular"
+                  class=""
+                />
                 <p class="text-xs text-center mt-2">Validar número celular</p>
               </div>
               <div class="insignia">
-                <img src="../../img/tarjetaDebito.png" alt="tarjeta credito/debito">
-                <p class="text-xs text-center mt-2">Agregar tarjeta crédito/debito</p>
+                <img
+                  src="../../img/tarjetaDebito.png"
+                  alt="tarjeta credito/debito"
+                />
+                <p class="text-xs text-center mt-2">
+                  Agregar tarjeta crédito/debito
+                </p>
               </div>
               <div class="insignia">
-                <img src="../../img/numCelular.png" alt="validar celular">
+                <img src="../../img/numCelular.png" alt="validar celular" />
                 <p class="text-xs text-center mt-2">Descripcion Actividad</p>
               </div>
               <div class="insignia">
-                <img src="../../img/tarjetaDebito.png" alt="tarjeta credito/debito">
+                <img
+                  src="../../img/tarjetaDebito.png"
+                  alt="tarjeta credito/debito"
+                />
                 <p class="text-xs text-center mt-2">Descripcion Actividad</p>
               </div>
               <div class="insignia">
-                <img src="../../img/numCelular.png" alt="validar celular">
+                <img src="../../img/numCelular.png" alt="validar celular" />
                 <p class="text-xs text-center mt-2">Descripcion Actividad</p>
               </div>
             </div>
@@ -125,72 +166,50 @@
           <div class="table rounded-md">
             <table class="table-auto rounded-md bg-white">
               <thead>
-              <tr>
-                <th class="px-4 py-1">Usuarios</th>
-                <th class="px-4 py-1">KTaxi</th>
-                <th class="px-4 py-1">Delivery</th>
-                <th class="px-4 py-1">Otro</th>
-                <th class="px-4 py-1">Total Insiginias</th>
-                <th class="px-4 py-1">Total Beneficios</th>
-              </tr>
+                <tr>
+                  <th class="px-4 py-1">Usuarios</th>
+                  <th class="px-4 py-1">KTaxi</th>
+                  <th class="px-4 py-1">Delivery</th>
+                  <th class="px-4 py-1">Otro</th>
+                  <th class="px-4 py-1">Total Insiginias</th>
+                  <th class="px-4 py-1">Total Beneficios</th>
+                </tr>
               </thead>
               <tbody>
-              <tr v-for="user in users" :key="user.id">
-                <td class="border px-4 py-1">{{ user.id }}</td>
-                <td class="border px-4 py-1">{{ user.KTaxi }}</td>
-                <td class="border px-4 py-1">{{ user.Delivery }}</td>
-                <td class="border px-4 py-1">{{ user.otro }}</td>
-                <td class="border px-4 py-1">{{ totalInsigniasObtenidas(user) }}</td>
-                <td class="border px-4 py-1">{{ user.TotalB_Obtenidos }}</td>
-              </tr>
+                <tr v-for="user in users" :key="user.usuario_nombre">
+                  <td class="border px-4 py-1">{{ user.usuario_nombre }}</td>
+                  <td class="border px-4 py-1">{{ user.total_insignias }}</td>
+                  <td class="border px-4 py-1">{{ user.Delivery }}</td>
+                  <td class="border px-4 py-1">{{ user.otro }}</td>
+                  <td class="border px-4 py-1">
+                    {{ totalInsigniasObtenidas(user) }}
+                  </td>
+                  <td class="border px-4 py-1">{{ user.total_beneficios }}</td>
+                </tr>
               </tbody>
             </table>
           </div>
         </div>
         <div class="contF-U ml-16 p-5 space-y-10 flex-col justify-center">
-          <div class="chartF mb-4 flex">
-            <div class="headersF flex-col">
-              <div class="despegable-SC absolute w-56">
-                <div class="select-DSC" @click="toggleDropdown('dropdownSCF')">
-                  <span>Todos los Servicios</span>
-                  <div :class="{'flecha-DSC': true, 'flecha-rotate-DSC': dropdowns.dropdownSCF}"></div>
-                </div>
-                <ul :class="{'menu-DSC': true, 'menu-DSC-open': dropdowns.dropdownSCF}">
-                  <li>Servicio 1</li>
-                  <li>Servicio 2</li>
-                  <li>Servicio 3</li>
-                  <li class="active-DSC">Todos los Servicios</li>
-                </ul>
-              </div>
-              <div class="despegable-FFC absolute w-32 ml-80">
-                <div class="select-DSC" @click="toggleDropdown('dropdownFCF')">
-                  <span>Fecha</span>
-                  <div :class="{'flecha-DSC': true, 'flecha-rotate-DSC': dropdowns.dropdownFCF}"></div>
-                </div>
-                <ul :class="{'menu-DSC': true, 'menu-DSC-open': dropdowns.dropdownFCF}">
-                  <li class="active-DSC">Fecha 1</li>
-                  <li>Fecha 2</li>
-                  <li>Fecha 2</li>
-                  <li>Fecha 3</li>
-                </ul>
-              </div>
-            </div>
-            <div class="cardChart flex-col mt-16">
-              <Bar
-                  ref="myChart"
-                  :options="chartOptionsF"
-                  :data="chartDataF"
-              />
-            </div>
-          </div>
+          <div class="chartF mb-4 flex"></div>
           <div class="chartU mb-4 flex">
             <div class="headersU flex-col mb-2">
               <div class="despegable-SC absolute w-56">
                 <div class="select-DSC" @click="toggleDropdown('dropdownSCU')">
                   <span>Todos los Servicios</span>
-                  <div :class="{'flecha-DSC': true, 'flecha-rotate-DSC': dropdowns.dropdownSCU}"></div>
+                  <div
+                    :class="{
+                      'flecha-DSC': true,
+                      'flecha-rotate-DSC': dropdowns.dropdownSCU,
+                    }"
+                  ></div>
                 </div>
-                <ul :class="{'menu-DSC': true, 'menu-DSC-open': dropdowns.dropdownSCU}">
+                <ul
+                  :class="{
+                    'menu-DSC': true,
+                    'menu-DSC-open': dropdowns.dropdownSCU,
+                  }"
+                >
                   <li>Servicio 1</li>
                   <li>Servicio 2</li>
                   <li>Servicio 3</li>
@@ -200,9 +219,19 @@
               <div class="despegable-FFC absolute w-32 ml-80">
                 <div class="select-DSC" @click="toggleDropdown('dropdownFCU')">
                   <span>Fecha</span>
-                  <div :class="{'flecha-DSC': true, 'flecha-rotate-DSC': dropdowns.dropdownFCU}"></div>
+                  <div
+                    :class="{
+                      'flecha-DSC': true,
+                      'flecha-rotate-DSC': dropdowns.dropdownFCU,
+                    }"
+                  ></div>
                 </div>
-                <ul :class="{'menu-DSC': true, 'menu-DSC-open': dropdowns.dropdownFCU}">
+                <ul
+                  :class="{
+                    'menu-DSC': true,
+                    'menu-DSC-open': dropdowns.dropdownFCU,
+                  }"
+                >
                   <li class="active-DSC">Fecha 1</li>
                   <li>Fecha 2</li>
                   <li>Fecha 2</li>
@@ -211,11 +240,7 @@
               </div>
             </div>
             <div class="cardChart flex-col mt-16">
-              <Bar
-                  ref="myChart"
-                  :options="chartOptionsU"
-                  :data="chartDataU"
-              />
+              <CharInsignias />
             </div>
           </div>
         </div>
@@ -225,173 +250,50 @@
 </template>
 
 <script>
-import {Bar} from 'vue-chartjs'
-import {Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale} from 'chart.js'
-
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
-
+import CharInsignias from "../../components/ChartInsignias.vue";
+import axios from "axios";
 export default {
-  components: {Bar},
+  components: { CharInsignias },
   data() {
     return {
       insignias: [],
-      chartDataF: {
-        labels: [
-          'Mayo',
-          'Junio',
-          'Julio',
-          'Agosto',
-        ],
-        datasets: [
-          {
-            label: '20 Viajes',
-            data: [125, 99, 150, 183],
-            fill: false,
-            backgroundColor: 'rgba(54, 162, 235, 0.4)',
-            borderColor: 'rgb(54, 162, 235)',
-            borderWidth: 1,
-          },
-          {
-            label: 'Forma de Pago',
-            data: [99, 120, 78, 56],
-            fill: false,
-            backgroundColor: 'rgba(201, 203, 207, 0.4)',
-            borderColor: 'rgb(201, 203, 207)',
-            borderWidth: 1,
-          },
-          {
-            label: '5 Recargas',
-            data: [89, 40, 110, 75],
-            fill: false,
-            backgroundColor: 'rgba(102, 102, 255, 0.4)',
-            borderColor: 'rgb(102, 102, 255)',
-            borderWidth: 1,
-          },
-          {
-            label: 'Evento asistido',
-            data: [79, 89, 130, 105],
-            fill: false,
-            backgroundColor: 'rgba(75, 192, 192, 0.4)',
-            borderColor: 'rgb(75, 192, 192)',
-            borderWidth: 1,
-          },
-        ],
-      },
-      chartDataU: {
-        labels: [
-          'Mayo',
-          'Junio',
-          'Julio',
-          'Agosto',
-        ],
-        datasets: [
-          {
-            label: 'kTaxi',
-            data: [150, 183, 125, 99],
-            fill: false,
-            backgroundColor: 'rgba(255, 99, 132, 0.4)',
-            borderColor: 'rgb(255, 99, 132)',
-            borderWidth: 1,
-          },
-          {
-            label: 'Delivery',
-            data: [78, 56, 99, 120],
-            fill: false,
-            backgroundColor: 'rgba(249,140,35,0.4)',
-            borderColor: 'rgb(255, 159, 64)',
-            borderWidth: 1,
-          },
-          {
-            label: 'Servicio 3',
-            data: [110, 75, 89, 40],
-            fill: false,
-            backgroundColor: 'rgba(75, 192, 192, 0.4)',
-            borderColor: 'rgb(75, 192, 192)',
-            borderWidth: 1,
-          },
-          {
-            label: 'Servicio 4',
-            data: [130, 105, 79, 89],
-            fill: false,
-            backgroundColor: 'rgba(153, 102, 255, 0.4)',
-            borderColor: 'rgba(153, 102, 255)',
-            borderWidth: 1,
-          },
-        ],
-      },
-      chartOptionsF: {
-        responsive: true,
-        plugins: {
-          title: {
-            fontSize: 25,
-            display: true,
-            text: 'Actividades completadas general en ultimos 4 meses',
-          },
-          legend: {
-            display: true,
-            position: 'bottom',
-            labels: {
-              usePointStyle: true,
-            },
-          },
-        },
-      },
-      chartOptionsU: {
-        responsive: true,
-        plugins: {
-          title: {
-            fontSize: 25,
-            display: true,
-            text: 'Datos Insignias obtenidas por servicio en últimos 4 meses',
-          },
-          legend: {
-            display: true,
-            position: 'bottom',
-            labels: {
-              usePointStyle: true,
-            },
-          },
-        },
-      },
-      currentPage: '',
+      users: [],
+      currentPage: "",
       dropdowns: {
         dropdownSCF: false,
         dropdownFCF: false,
         dropdownSCU: false,
         dropdownFCU: false,
       },
-      users: [
-        {id: 1, KTaxi: 20, Delivery: 10, otro: 0, TotalI_Obtenidas: 0, TotalB_Obtenidos: 0},
-        {id: 2, KTaxi: 0, Delivery: 0, otro: 0, TotalI_Obtenidas: 0, TotalB_Obtenidos: 0},
-        {id: 3, KTaxi: 20, Delivery: 10, otro: 0, TotalI_Obtenidas: 0, TotalB_Obtenidos: 0},
-      ],
+
       cupones: [
-        {num: 1, cupon: 20},
-        {num: 2, cupon: 0},
-        {num: 3, cupon: 20},
+        { num: 1, cupon: 20 },
+        { num: 2, cupon: 0 },
+        { num: 3, cupon: 20 },
       ],
     };
   },
   mounted() {
     this.currentPage = this.$route.path;
-    this.fetchInsignias();
+    this.fetchData();
   },
   methods: {
     toggleDropdown(dropdown) {
       this.dropdowns[dropdown] = !this.dropdowns[dropdown];
     },
     totalInsigniasObtenidas(user) {
-      return user.KTaxi + user.Delivery + user.otro;
+      return Number(user.total_insignias);
     },
-    async fetchInsignias() {
+    async fetchData() {
       try {
-        const response = await fetch('https://backend-clipp-production.up.railway.app/api/insignias');
-        const data = await response.json();
-        this.insignias = data; // Asegúrate de que tu API devuelve un array de objetos con los datos de las insignias
+        const response = await axios.get("https://backend-clipp-production.up.railway.app/api/consultas/top");
+        this.users = response.data;
+        console.log(this.users)
       } catch (error) {
-        console.error('Error al cargar las insignias:', error);
+        
+        console.error(error);
       }
-    }
+    },
   },
 };
 </script>
@@ -440,7 +342,7 @@ export default {
   align-items: center;
   flex-shrink: 0;
   border-radius: 10px;
-  border: 1px solid #202D8D;
+  border: 1px solid #202d8d;
 }
 
 .button-content {
@@ -449,7 +351,7 @@ export default {
 }
 
 .active-button {
-  background-color: #202D8D;
+  background-color: #202d8d;
   color: white;
 }
 
@@ -535,7 +437,7 @@ export default {
 }
 
 .insignias p {
-  color: #6D6D6D;
+  color: #6d6d6d;
   text-align: center;
   font-family: Lato, serif;
   font-style: normal;
@@ -561,8 +463,8 @@ export default {
 
 .verInsignias-content {
   display: block;
-  background-color: #F9F9F9;
-  color: #2794F8;
+  background-color: #f9f9f9;
+  color: #2794f8;
   padding: 10px 20px;
   border-radius: 5px;
   text-decoration: none;

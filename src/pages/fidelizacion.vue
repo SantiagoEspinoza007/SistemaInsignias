@@ -81,14 +81,17 @@
             <div class="grid grid-cols-6 gap-4">
               <div v-for="insignia in fidelizacionInsignias" :key="insignia.id">
                 <div class="insignia">
-                  <img :src="insignia.imagenUrl" :alt="insignia.titulo" class="" />
+                  <img
+                    :src="insignia.imagenUrl"
+                    :alt="insignia.titulo"
+                    class=""
+                  />
                   <p class="text-xs text-center mt-2">
                     {{ insignia.descripcion }}
                   </p>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
         <div class="cont-f flex-col ml-10 justify-center">
@@ -115,22 +118,24 @@
             </ul>
           </div>
           <div class="FchartCard text-gray-600 mt-20 mb-10">
-            <Bar ref="myChart" :options="chartOptions" :data="chartData" />
+            <!-- <Bar ref="myChart" :options="chartOptions" :data="chartData" /> -->
+            <ChartComponent />
           </div>
+
           <table class="table-auto bg-white absolute">
             <thead>
               <tr>
                 <th class="px-4 py-2 text-sm">Usuarios</th>
-                <th class="px-4 py-2 text-sm">Insiginias obtenidas</th>
+                <th class="px-4 py-2 text-sm">Insignias obtenidas</th>
                 <th class="px-4 py-2 text-sm">Beneficios reclamados</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="user in users" :key="user.id">
-                <td class="border px-4 py-2">{{ user.id }}</td>
-                <td class="border px-4 py-2">{{ user.Inisgnias_Obtenidas }}</td>
+                <td class="border px-4 py-2">{{ user.nombre_usuario }}</td>
+                <td class="border px-4 py-2">{{ user.total_insignias_fidelizacion }}</td>
                 <td class="border px-4 py-2">
-                  {{ user.Beneficios_Reclamados }}
+                  {{ user.total_beneficios }}
                 </td>
               </tr>
             </tbody>
@@ -142,155 +147,22 @@
 </template>
 
 <script>
-import DropdownMenu from "@/components/DropdownMenu.vue";
+import ChartComponent from "../components/ChartComponent.vue";
 import axios from "axios";
-import { Bar } from "vue-chartjs";
-import {
-  Chart as ChartJS,
-  Title,
-  Tooltip,
-  Legend,
-  BarElement,
-  CategoryScale,
-  LinearScale,
-} from "chart.js";
-
-ChartJS.register(
-  Title,
-  Tooltip,
-  Legend,
-  BarElement,
-  CategoryScale,
-  LinearScale
-);
 
 export default {
   components: { Bar, DropdownMenu },
   data() {
     return {
+      users: [],
       insignias: [],
-      optionsF: ['Ktaxi'],
-      chartData: {
-        labels: ["Insignias Fidelización"],
-        datasets: [
-          {
-            label: "20 Viajes",
-            data: [150],
-            fill: false,
-            backgroundColor: "rgba(255, 99, 132, 0.4)",
-            borderColor: "rgb(255, 99, 132)",
-            borderWidth: 1,
-          },
-          {
-            label: "Forma Pago",
-            data: [123],
-            fill: false,
-            backgroundColor: "rgba(249,140,35,0.4)",
-            borderColor: "rgb(255, 159, 64)",
-            borderWidth: 1,
-          },
-          {
-            label: "30km",
-            data: [160],
-            fill: false,
-            backgroundColor: "rgba(255, 205, 86, 0.4)",
-            borderColor: "rgb(255, 205, 86)",
-            borderWidth: 1,
-          },
-          {
-            label: "Recomendar 1",
-            data: [155],
-            fill: false,
-            backgroundColor: "rgba(75, 192, 192, 0.4)",
-            borderColor: "rgb(75, 192, 192)",
-            borderWidth: 1,
-          },
-          {
-            label: "60km",
-            data: [127],
-            fill: false,
-            backgroundColor: "rgba(54, 162, 235, 0.4)",
-            borderColor: "rgb(54, 162, 235)",
-            barPercentage: 0.8,
-            borderWidth: 1,
-          },
-          {
-            label: "100km",
-            data: [110],
-            fill: false,
-            backgroundColor: "rgba(153, 102, 255, 0.4)",
-            borderColor: "rgb(153, 102, 255)",
-            barPercentage: 0.8,
-            borderWidth: 1,
-          },
-          {
-            label: "Recomendar 2",
-            data: [100],
-            fill: false,
-            backgroundColor: "rgba(201, 203, 207, 0.4)",
-            borderColor: "rgb(201, 203, 207)",
-            barPercentage: 0.8,
-            borderWidth: 1,
-          },
-          {
-            axis: "y",
-            label: "10 Viajes",
-            data: [95],
-            fill: false,
-            backgroundColor: "rgba(255, 102, 255, 0.4)",
-            borderColor: "rgb(255, 102, 255)",
-            borderWidth: 1,
-            barPercentage: 0.8,
-          },
-          {
-            axis: "y",
-            label: "Opinion",
-            data: [105],
-            fill: false,
-            backgroundColor: "rgba(102, 102, 255, 0.4)",
-            borderColor: "rgb(102, 102, 255)",
-            borderWidth: 1,
-            barPercentage: 0.8,
-          },
-        ],
-      },
-      chartOptions: {
-        responsive: true,
-        indexAxis: "y",
-        plugins: {
-          title: {
-            fontSize: 25,
-            display: true,
-            text: "Insignias Fidelización mas conseguidas",
-          },
-          legend: {
-            display: true,
-            position: "bottom",
-            labels: {
-              usePointStyle: true,
-            },
-          },
-        },
-        scales: {
-          y: {
-            ticks: {
-              display: false,
-            },
-          },
-        },
-      },
       currentPage: "",
       dropdowns: {
         dropdownSC: false,
         dropdownFFC: false,
         dropdownS: false,
       },
-      users: [
-        { id: 1, Inisgnias_Obtenidas: 150, Beneficios_Reclamados: 10 },
-        { id: 2, Inisgnias_Obtenidas: 123, Beneficios_Reclamados: 5 },
-        { id: 3, Inisgnias_Obtenidas: 160, Beneficios_Reclamados: 15 },
-        { id: 4, Inisgnias_Obtenidas: 155, Beneficios_Reclamados: 2 },
-      ],
+      
       showModal: false,
       showModal2: false,
       cupones: [
@@ -302,22 +174,35 @@ export default {
   },
   computed: {
     fidelizacionInsignias() {
-      return this.insignias.filter((insignia) => insignia.tipo === "fidelización");
-    }
+      return this.insignias.filter(
+        (insignia) => insignia.tipo === "fidelización"
+      );
+    },
   },
   mounted() {
+    this.fetchUsersData();
     const apiUrl =
       "https://backend-clipp-production.up.railway.app/api/insignias";
 
     axios.get(apiUrl).then((response) => {
       this.insignias = response.data;
     });
+
     this.currentPage = this.$route.path;
   },
   methods: {
     toggleDropdown(dropdown) {
       this.dropdowns[dropdown] = !this.dropdowns[dropdown];
     },
+    async fetchUsersData() {
+      try {
+        const response = await axios.get("https://backend-clipp-production.up.railway.app/api/consultas/tabla");
+        console.log(response.data)
+        this.users = response.data;
+      } catch (error) {
+        console.error(error);
+      }
+    }
   },
 };
 </script>
