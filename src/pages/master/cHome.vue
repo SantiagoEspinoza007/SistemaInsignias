@@ -99,18 +99,7 @@
                   Llegaste a 30 Km recorridos
                 </p>
               </div>
-              <div class="insignia">
-                <p class="text-base text-center m-1">Servicio</p>
-                <img src="../../img/20taxis.png" alt="20 Taxis" />
-                <p class="text-xs text-center mt-2">Descripcion Actividad</p>
-              </div>
-              <div class="insignia">
-                <p class="text-base text-center m-1">Servicio</p>
-                <img src="../../img/30km.png" alt="30 Km" />
-                <p class="text-xs text-center mt-2">
-                  Llegaste a 30 Km recorridos
-                </p>
-              </div>
+              
             </div>
             <router-link to="/fidelizacion" class="verInsignias">
               <div class="verInsignias-content">
@@ -141,21 +130,7 @@
                   Agregar tarjeta crédito/debito
                 </p>
               </div>
-              <div class="insignia">
-                <img src="../../img/numCelular.png" alt="validar celular" />
-                <p class="text-xs text-center mt-2">Descripcion Actividad</p>
-              </div>
-              <div class="insignia">
-                <img
-                  src="../../img/tarjetaDebito.png"
-                  alt="tarjeta credito/debito"
-                />
-                <p class="text-xs text-center mt-2">Descripcion Actividad</p>
-              </div>
-              <div class="insignia">
-                <img src="../../img/numCelular.png" alt="validar celular" />
-                <p class="text-xs text-center mt-2">Descripcion Actividad</p>
-              </div>
+              
             </div>
             <router-link to="/usabilidad" class="verInsignias">
               <div class="verInsignias-content">
