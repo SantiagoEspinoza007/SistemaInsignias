@@ -51,11 +51,11 @@
             </router-link>
           </li>
           <li class="absolute bottom-0">
-            <router-link to="/insignias">
+            <router-link to="/administrador">
               <button
                 :class="[
                   'button',
-                  { 'active-button': currentPage === '/insignias' },
+                  { 'active-button': currentPage === '/administrador' },
                 ]"
               >
                 <div class="button-content">

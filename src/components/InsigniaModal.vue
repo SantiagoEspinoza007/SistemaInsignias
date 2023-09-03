@@ -120,9 +120,10 @@ export default {
         });
   },
   methods: {
-    enviarTexto(fila) {
-      this.actividad = fila.id;
-      this.$emit("enviarActividad", this.actividad);
+    enviarTexto(insignia) {
+      this.$emit('enviarActividadId', insignia.id);
+      this.$emit('enviarActividadTitulo', insignia.nombre);
+      this.showModal = false;
     },
   },
 };

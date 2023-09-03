@@ -33,7 +33,7 @@
       <tbody>
       <tr v-for="(item, index) in itemsPaginaActual1"
           :key="index"
-          @dblclick="enviarItem(item.id)"
+          @dblclick="seleccionarInsignia(item)"
       >
         <td class="hidden">{{ item.id }}</td>
         <td class="border px-8">
@@ -56,7 +56,6 @@
 <script>
 import DropdownMenuW from "@/components/DropdownMenuW.vue";
 import axios from "axios";
-import formInsignias from "@/components/FormInsignias.vue";
 
 
 export default {
@@ -75,20 +74,6 @@ export default {
       itemsPaginaActual1: [],
       tableOptions: [],
     }
-  },
-  props: {
-    options: {
-      type: Array,
-      required: true
-    },
-    id: {
-      type: Number,
-      required: true,
-    },
-    fila: {
-      type: Object,
-      required: true,
-    },
   },
   methods: {
     cambiarPagina(numeroPagina) {

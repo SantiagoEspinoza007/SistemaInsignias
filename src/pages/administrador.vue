@@ -39,8 +39,8 @@
             </router-link>
           </li>
           <li class="absolute bottom-0">
-            <router-link to="/insignias">
-              <button :class="['button', { 'active-button': currentPage === '/insignias' }]">
+            <router-link to="/administrador">
+              <button :class="['button', { 'active-button': currentPage === '/administrador' }]">
                 <div class="button-content">
                   <img src="../img/upload-w.svg" alt="Insignias">
                   <span>Cargar</span>
@@ -53,25 +53,18 @@
     </div>
     <!--  Main  -->
     <div class="main w-[1800px] h-[1000px] bg-clipAzul p-6">
-      <div class="border h-full border-cyan-600 rounded-md border-2 p-4 flex justify-between pl-24 pr-24">
+      <div class="border h-full border-cyan-600 rounded-md border-2 flex justify-between pt-14 pl-24 pr-24">
         <div class="col-cargarinfo">
-          <div class="form-actividades rounded-md bg-white w-[600px] p-2 mb-2">
-            <FormActividades></FormActividades>
-          </div>
-          <div class="form-insignias rounded-md bg-white w-[600px] p-2 mb-2">
-            <form-insignias :id="idInsignia"></form-insignias>
-          </div>
+          
+          <FormActividades></FormActividades>
+
+          <form-insignias></form-insignias>
+        </div>
+        <div class="col-tablas">
 
           <form-publicidad></form-publicidad>
 
-        </div>
-        <div class="col-tablas ml-8">
-          <div>
-            <TableUploadData :id="idInsignia" @enviarInsignia="idInsignia" class="data-table table-auto rounded-md bg-white mb-8"/>
-          </div>
-
           <form-cupones></form-cupones>
-
         </div>
       </div>
     </div>
@@ -105,48 +98,12 @@ export default {
       paginaActual: 1,
       elementosPorPagina: 5,
       idActividad: null,
-      items: [
-        { id: 1, insignias: 'Insignia 1', tipo: 'Tipo A', actividad: 'Actividad 1', cantidad: 10 },
-        { id: 2, insignias: 'Insignia 2', tipo: 'Tipo B', actividad: 'Actividad 2', cantidad: 5 },
-        { id: 3, insignias: 'Insignia 3', tipo: 'Tipo A', actividad: 'Actividad 1', cantidad: 41 },
-        { id: 4, insignias: 'Insignia 4', tipo: 'Tipo B', actividad: 'Actividad 2', cantidad: 25 },
-        { id: 5, insignias: 'Insignia 5', tipo: 'Tipo A', actividad: 'Actividad 1', cantidad: 13 },
-      ],
-      formularios: [
-        {
-          titulo: '',
-          cantidad: '',
-          progreso: '',
-        },
-        {
-          titulo: '',
-          tipo: '',
-          actividad: '',
-          servicio: '',
-          imagen: null,
-          imagenPrevia: null,
-        },
-        {
-          imagen: null,
-          imagenPrevia: null,
-        },
-        {
-          porceDescuento: '',
-          descripcion: '',
-          fecha: '',
-          tiempo: '',
-          imagen: null,
-          imagenPrevia: null,
-        }
-      ],
+      items: [],
+      formularios: [],
       currentPage: '',
       showModal: false,
       showModal2: false,
-      cupones: [
-        {num: 1, cupon: 20},
-        {num: 2, cupon: 0},
-        {num: 3, cupon: 20},
-      ],
+      cupones: [],
     }
   },
   mounted() {
@@ -180,7 +137,7 @@ export default {
         formulario.imagenPrevia = null;
       }
     },
-    idInsignia(id){
+    idInsignia(id) {
       this.idInsignia(id);
     }
   },
@@ -251,7 +208,7 @@ export default {
   border: 2px solid #ccc;
   border-radius: 8px;
   width: 160px;
-  height: 75px;
+  height: 160px;
 }
 
 .modal-buttom {
@@ -272,7 +229,7 @@ export default {
   left: 80%;
 }
 
-input[type="file"]{
+input[type="file"] {
   color: transparent;
 }
 
@@ -283,7 +240,7 @@ input[type="file"]{
   border-radius: 8px;
   cursor: pointer;
   position: relative;
-  width: 175px;
+  width: 100px;
   height: 35px;
 }
 

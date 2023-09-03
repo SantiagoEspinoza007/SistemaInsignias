@@ -51,11 +51,11 @@
             </router-link>
           </li>
           <li class="absolute bottom-0">
-            <router-link to="/insignias">
+            <router-link to="/administrador">
               <button
                 :class="[
                   'button',
-                  { 'active-button': currentPage === '/insignias' },
+                  { 'active-button': currentPage === '/administrador' },
                 ]"
               >
                 <div class="button-content">
@@ -166,8 +166,37 @@
           </div>
         </div>
         <div class="contF-U ml-16 p-5 space-y-10 flex-col justify-center">
-          <div class="chartF mb-4 flex"></div>
-          <div class="chartU mb-4 flex">
+          <div class="chartF mb-4 flex">
+            <div class="headersF flex mb-2">
+              <div class="despegable-SC absolute w-56">
+                <div class="select-DSC" @click="toggleDropdown('dropdownSCU')">
+                  <span>Todos los Servicios</span>
+                  <div
+                      :class="{
+                      'flecha-DSC': true,
+                      'flecha-rotate-DSC': dropdowns.dropdownSCU,
+                    }"
+                  ></div>
+                </div>
+                <ul
+                    :class="{
+                    'menu-DSC': true,
+                    'menu-DSC-open': dropdowns.dropdownSCU,
+                  }"
+                >
+                  <li>Servicio 1</li>
+                  <li>Servicio 2</li>
+                  <li>Servicio 3</li>
+                  <li class="active-DSC">Todos los Servicios</li>
+                </ul>
+              </div>
+              <input class="inputFecha w-56 block" type="date">
+            </div>
+            <div class="cardChart flex-col mt-16">
+              <ChartActividades></ChartActividades>
+            </div>
+          </div>
+          <div class="chartU flex">
             <div class="headersU flex-col mb-2">
               <div class="despegable-SC absolute w-56">
                 <div class="select-DSC" @click="toggleDropdown('dropdownSCU')">
@@ -191,28 +220,7 @@
                   <li class="active-DSC">Todos los Servicios</li>
                 </ul>
               </div>
-              <div class="despegable-FFC absolute w-32 ml-80">
-                <div class="select-DSC" @click="toggleDropdown('dropdownFCU')">
-                  <span>Fecha</span>
-                  <div
-                    :class="{
-                      'flecha-DSC': true,
-                      'flecha-rotate-DSC': dropdowns.dropdownFCU,
-                    }"
-                  ></div>
-                </div>
-                <ul
-                  :class="{
-                    'menu-DSC': true,
-                    'menu-DSC-open': dropdowns.dropdownFCU,
-                  }"
-                >
-                  <li class="active-DSC">Fecha 1</li>
-                  <li>Fecha 2</li>
-                  <li>Fecha 2</li>
-                  <li>Fecha 3</li>
-                </ul>
-              </div>
+              <input class="inputFecha w-56" type="date">
             </div>
             <div class="cardChart flex-col mt-16">
               <CharInsignias />
@@ -225,10 +233,13 @@
 </template>
 
 <script>
+import ChartActividades from "@/components/ChartActividades.vue";
 import CharInsignias from "../../components/ChartInsignias.vue";
 import axios from "axios";
+
 export default {
-  components: { CharInsignias },
+  components: { CharInsignias,
+    ChartActividades },
   data() {
     return {
       insignias: [],
@@ -457,5 +468,14 @@ export default {
   background-color: #ffffff;
   padding: 20px;
   border-radius: 10px;
+}
+
+.inputFecha {
+  position: absolute;
+  margin-left: 275px;
+  border: 2px solid #ffffff;
+  border-radius: 8px;
+  height: 45px;
+  padding: 5px;
 }
 </style>

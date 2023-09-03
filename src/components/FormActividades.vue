@@ -1,44 +1,46 @@
 <template>
-  <form @submit.prevent="submitForm">
-    <h2 class="font-bold text-lg">Actividades</h2>
-    <div class="contenido flex">
-      <div class="actividades-labels mt-4">
-        <h4 class="mb-6">Titulo</h4>
-        <h4 class="mb-6">Cantidad</h4>
-        <h4 class="mb-6">Descripción</h4>
+  <div class="form-actividades rounded-md bg-white w-[600px] p-2 mb-10">
+    <form @submit.prevent="submitForm">
+      <h2 class="font-bold text-lg">Actividades</h2>
+      <div class="contenido flex">
+        <div class="actividades-labels mt-4">
+          <h4 class="mb-6">Titulo</h4>
+          <h4 class="mb-6">Cantidad</h4>
+          <h4 class="mb-6">Descripción</h4>
+        </div>
+        <div class="actividades-inputs flex flex-col w-[75%]">
+          <input class="input-global" type="text" id="titulo" v-model="titulo" placeholder="Titulo de la actividad">
+          <input class="input-global" type="text" id="cantidad" v-model="cantidad"
+                 placeholder="# de acciones para completar actividad">
+          <input class="input-global" type="text" id="descripcion" v-model="descripcion"
+                 placeholder="Descripción para completar la actividad">
+          <a class="text-xs text-gray-400 ml-[25px]">Ej: Llevas 0/# ... para tu siguiente insignia</a>
+        </div>
+        <div class="actividades-botones flex flex-col items-end">
+          <button :disabled="!formularioCompleto"
+                  :class="{'button-block': !formularioCompleto}"
+                  class="button-global text-[#FF0000FF]" type="button"
+                  @click="eliminarActividad"
+          >
+            <span>Eliminar</span>
+          </button>
+          <button :disabled="!formularioCompleto"
+                  :class="{'button-block': !formularioCompleto}"
+                  class="button-global text-[#2794F8]" type="button"
+                  @click="submitPatch"
+          >
+            <span>Editar</span>
+          </button>
+          <button :disabled="!formularioCompleto"
+                  :class="{'button-block': !formularioCompleto}"
+                  class="button-global text-[#2794F8]" type="submit">
+            <span>Guardar</span>
+          </button>
+          <buscar-actividad @enviarActividad="cargarActividad"></buscar-actividad>
+        </div>
       </div>
-      <div class="actividades-inputs flex flex-col w-[75%]">
-        <input class="input-global" type="text" id="titulo" v-model="titulo" placeholder="Titulo de la actividad">
-        <input class="input-global" type="text" id="cantidad" v-model="cantidad"
-               placeholder="# de acciones para completar actividad">
-        <input class="input-global" type="text" id="descripcion" v-model="descripcion"
-               placeholder="Descripción para completar la actividad">
-        <a class="text-xs text-gray-400 ml-[25px]">Ej: Llevas 0/# ... para tu siguiente insignia</a>
-      </div>
-      <div class="actividades-botones flex flex-col items-end">
-        <button :disabled="!formularioCompleto"
-                :class="{'button-block': !formularioCompleto}"
-                class="button-global text-[#FF0000FF]" type="button"
-                @click="eliminarActividad"
-        >
-          <span>Eliminar</span>
-        </button>
-        <button :disabled="!formularioCompleto"
-                :class="{'button-block': !formularioCompleto}"
-                class="button-global text-[#2794F8]" type="button"
-                @click="submitPatch"
-        >
-          <span>Editar</span>
-        </button>
-        <button :disabled="!formularioCompleto"
-                :class="{'button-block': !formularioCompleto}"
-                class="button-global text-[#2794F8]" type="submit">
-          <span>Guardar</span>
-        </button>
-        <buscar-actividad @enviarActividad="cargarActividad"></buscar-actividad>
-      </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </template>
 <script>
 import axios, {Axios} from "axios";

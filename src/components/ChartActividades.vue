@@ -1,6 +1,6 @@
 <template>
   <div>
-    <canvas id="myChart"></canvas>
+    <canvas id="actividadesChart"></canvas>
   </div>
 </template>
   
@@ -27,7 +27,7 @@ ChartJS.register(
 );
 
 export default {
-  name: "CharInsignias",
+  name: "ChartActividades",
   extends: Bar,
   components: { Bar },
   data() {
@@ -42,7 +42,7 @@ export default {
           title: {
             fontSize: 25,
             display: true,
-            text: "Insignias obtenidas por servicio en últimos 4 meses",
+            text: "Actividades completadas general en ultimos 4 meses",
           },
           legend: {
             display: true,
@@ -65,7 +65,7 @@ export default {
   },
 
   async mounted() {
-    const ctx = document.getElementById("myChart");
+    const ctx = document.getElementById("actividadesChart");
 
     const myChart = new ChartJS(ctx, {
       type: "bar",
@@ -87,7 +87,7 @@ export default {
     async fetchData() {
       try {
         const response = await axios.get(
-          "https://backend-clipp-production.up.railway.app/api/consultas/insignias"
+          "https://backend-clipp-production.up.railway.app/api/consultas/actividades"
         );
         console.log(response.data)
         const data = response.data;

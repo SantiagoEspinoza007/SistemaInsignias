@@ -51,11 +51,11 @@
             </router-link>
           </li>
           <li class="absolute bottom-0">
-            <router-link to="/insignias">
+            <router-link to="/administrador">
               <button
                 :class="[
                   'button',
-                  { 'active-button': currentPage === '/insignias' },
+                  { 'active-button': currentPage === '/administrador' },
                 ]"
               >
                 <div class="button-content">
@@ -95,28 +95,7 @@
           </div>
         </div>
         <div class="cont-f flex-col ml-10 justify-center">
-          <div class="despegable-FFC absolute w-32">
-            <div class="select-DSC" @click="toggleDropdown('dropdownFCU')">
-              <span>Fecha</span>
-              <div
-                :class="{
-                  'flecha-DSC': true,
-                  'flecha-rotate-DSC': dropdowns.dropdownFCU,
-                }"
-              ></div>
-            </div>
-            <ul
-              :class="{
-                'menu-DSC': true,
-                'menu-DSC-open': dropdowns.dropdownFCU,
-              }"
-            >
-              <li class="active-DSC">Fecha 1</li>
-              <li>Fecha 2</li>
-              <li>Fecha 2</li>
-              <li>Fecha 3</li>
-            </ul>
-          </div>
+          <input class="inputFechaF w-56" type="date">
           <div class="FchartCard text-gray-600 mt-20 mb-10">
             <!-- <Bar ref="myChart" :options="chartOptions" :data="chartData" /> -->
             <ChartComponent />
@@ -299,5 +278,12 @@ export default {
   background-color: #ffffff;
   padding: 20px;
   border-radius: 10px;
+}
+.inputFechaF {
+  position: absolute;
+  border: 2px solid #ffffff;
+  border-radius: 8px;
+  height: 45px;
+  padding: 5px;
 }
 </style>

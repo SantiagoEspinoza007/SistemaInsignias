@@ -66,7 +66,7 @@ export default {
 }
 
 .spanDefault {
-  color: #ccc;
+  color: #000;
 }
 
 .spanSelected {

@@ -1,9 +1,9 @@
 <template>
   <button type="button"
-          class="button-Cupones w-[200px] text-[#202D8D]"
+          class="button-Cupones text-[#2794F8]"
           @click="showModal = true"
 >
-    <span>Ver Cupones</span>
+    <span>Buscar</span>
   </button>
 
   <transition name="fade">

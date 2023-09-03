@@ -70,7 +70,7 @@ export default {
 }
 
 .spanSelectedw {
-  color: #ffffff;
+  color: #000000;
 }
 
 .select {

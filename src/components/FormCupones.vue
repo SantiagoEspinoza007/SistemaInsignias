@@ -1,7 +1,7 @@
 <template>
-  <div class="form-cupones rounded-md bg-white w-[600px] p-4 mb-4">
+  <div class="form-cupones rounded-md bg-white w-[600px] p-4">
     <form @submit.prevent="submitForm">
-      <h3 class="mb-4">Cupones</h3>
+      <h3 class="mb-4 font-bold text-lg">Cupones</h3>
       <div class="contenido flex">
         <div class="cupones-labels ">
           <h4 class="mt-2 mb-4">Titulo</h4>
@@ -17,7 +17,7 @@
           <input class="input-global" id="fecha" v-model="fecha" type="datetime-local">
           <div class="cargarImagen flex">
             <div class="view-Imagen justify-center">
-              <canvas ref="canvas" width="25" height="25" style="display: none;"></canvas>
+              <canvas ref="canvas" width="160" height="160" style="display: none;"></canvas>
               <img v-if="imagenPrevia" :src="imagenPrevia" alt="Previsualización de la imagen">
             </div>
             <div class="self-end ml-4">
@@ -51,11 +51,11 @@
                   class="button-global text-[#2794F8]" type="submit">
             <span>Guardar</span>
           </button>
+          <CuponesModal @enviarBeneficio="actualizarBeneficio"></CuponesModal>
         </div>
       </div>
     </form>
   </div>
-  <CuponesModal @enviarBeneficio="actualizarBeneficio"></CuponesModal>
 </template>
 <script>
 import CuponesModal from "@/components/CuponesModal.vue";
@@ -213,7 +213,7 @@ export default {
           const img = new Image();
 
           img.onload = () => {
-            context.drawImage(img, 0, 0, 70, 70);
+            context.drawImage(img, 0, 0, 160, 160);
             this.imagenPrevia = canvas.toDataURL('image/png');
           };
 

@@ -9,7 +9,7 @@
         <div class="publicidad-inputs w-[75%] mb-4">
           <div class="cargarImagen flex">
             <div class="view-Imagen items-center">
-              <canvas ref="canvas" width="100" height="100" style="display: none;"></canvas>
+              <canvas ref="canvas" width="160" height="160" style="display: none;"></canvas>
               <img v-if="imagenPrevia" :src="imagenPrevia" alt="Previsualización de la imagen">
             </div>
             <div class="ml-4 self-end">
@@ -87,7 +87,7 @@ export default {
           const img = new Image();
 
           img.onload = () => {
-            context.drawImage(img, 0, 0, 70, 70);
+            context.drawImage(img, 0, 0, 160, 160);
             this.imagenPrevia = canvas.toDataURL('image/png');
           };
 
