@@ -29,7 +29,7 @@
                   class="button-global text-[#2794F8]" type="button"
                   @click="submitPatch"
           >
-            <span>Editar</span>
+            <span>Actualizar</span>
           </button>
           <button :disabled="!formularioCompleto"
                   :class="{'button-block': !formularioCompleto}"
@@ -69,7 +69,7 @@ export default {
       };
 
       // URL de tu endpoint POST
-      const apiUrl = "https://backend-clipp-production.up.railway.app/api/actividades";
+      const apiUrl = "http://backend-clipp-production-2fcb.up.railway.app/api/actividades";
 
       // Realiza la solicitud POST
       axios.post(apiUrl, formData)
@@ -112,7 +112,7 @@ export default {
       // Luego, hacemos una solicitud GET para obtener la información de la actividad
       axios
           .get(
-              `https://backend-clipp-production.up.railway.app/api/actividades/${this.idActividad}`
+              `http://backend-clipp-production-2fcb.up.railway.app/api/actividades/${this.idActividad}`
           )
           .then((response) => {
             // Asignamos la información de la actividad a las propiedades del formulario
@@ -129,6 +129,7 @@ export default {
       // Crea un objeto con los datos que deseas actualizar
       const actividadActualizada = {
         nombre: this.titulo,
+        total: this.cantidad,
         descripcion: this.descripcion,
       };
 
@@ -141,7 +142,7 @@ export default {
       // Realiza la solicitud PATCH al servidor
       axios
           .patch(
-              `https://backend-clipp-production.up.railway.app/api/actividades/${this.idActividad}`,
+              `http://backend-clipp-production-2fcb.up.railway.app/api/actividades/${this.idActividad}`,
               actividadActualizada
           )
           .then((response) => {
@@ -169,7 +170,7 @@ export default {
       // Realiza la solicitud DELETE al servidor
       axios
           .delete(
-              `https://backend-clipp-production.up.railway.app/api/actividades/${this.idActividad}`
+              `http://backend-clipp-production-2fcb.up.railway.app/api/actividades/${this.idActividad}`
           )
           .then((response) => {
             // Maneja la respuesta de éxito según tus necesidades

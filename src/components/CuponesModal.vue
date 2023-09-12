@@ -106,7 +106,7 @@ export default {
     },
   },
   mounted() {
-    axios.get("https://backend-clipp-production.up.railway.app/api/beneficios")
+    axios.get("http://backend-clipp-production-2fcb.up.railway.app/api/beneficios")
         .then((response) => {
           this.listaBeneficios = response.data
           this.paginas = this.totalPaginas;

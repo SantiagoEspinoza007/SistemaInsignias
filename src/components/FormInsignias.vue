@@ -16,18 +16,18 @@
                  placeholder="Descripción de la insignia">
           <div class="menus flex">
             <DropdownMenuW :options="optionsTipo"
-                          class="despegable-global w-[35%]"
-                          id="tipo"
-                          v-model="tipo"
-                          placeholder="Tipo"
-                          @option-selected="updateTipo"
+                           class="despegable-global w-[35%]"
+                           id="tipo"
+                           v-model="tipo"
+                           placeholder="Tipo"
+                           @option-selected="updateTipo"
             />
             <DropdownMenuW :options="optionsServicio"
-                          class="despegable-global w-[35%]"
-                          id="servicio"
-                          v-model="servicio"
-                          placeholder="Servicio"
-                          @option-selected="updateServicio"
+                           class="despegable-global w-[35%]"
+                           id="servicio"
+                           v-model="servicio"
+                           placeholder="Servicio"
+                           @option-selected="updateServicio"
             />
           </div>
           <div class="actividad flex mt-2">
@@ -60,20 +60,27 @@
         <div class="insignias-botones flex flex-col items-end mt-2">
           <button :disabled="!formularioCompleto"
                   :class="{'button-block': !formularioCompleto}"
-                  class="button-global text-[#FF0000FF]" type="button">
+                  class="button-global text-[#FF0000FF]" type="button"
+                  @click="eliminarInsignia"
+          >
             <span>Eliminar</span>
           </button>
           <button :disabled="!formularioCompleto"
                   :class="{'button-block': !formularioCompleto}"
-                  class="button-global text-[#2794F8]" type="button">
-            <span>Editar</span>
+                  class="button-global text-[#2794F8]" type="button"
+                  @click="submitPatch"
+          >
+            <span>Actualizar</span>
           </button>
           <button :disabled="!formularioCompleto"
                   :class="{'button-block': !formularioCompleto}"
                   class="button-global text-[#2794F8]" type="submit">
             <span>Guardar</span>
           </button>
-          <buscar-insginia-modal @enviarInsignia="actualizarInsignia"></buscar-insginia-modal>
+          <buscar-insginia-modal
+              @enviarInsignia="actualizarInsignia"
+              @enviarActividadTitulo="actualizarActividadTitulo"
+          />
         </div>
       </div>
     </form>
@@ -119,7 +126,7 @@ export default {
     submitForm() {
       // Crea un objeto con los datos del formulario
       console.log("Datos del formulario:", this.titulo,
-          this.descripcion, this.imagenUrl, this.tipo ,this.actividad);
+          this.descripcion, this.imagenUrl, this.tipo, this.actividad);
 
       const formData = new FormData();
       formData.append('titulo', this.titulo);
@@ -133,7 +140,7 @@ export default {
 
       // Realiza una solicitud POST al backend para crear el registro de insignia
       axios
-          .post("https://backend-clipp-production.up.railway.app/api/insignias", formData)
+          .post("http://backend-clipp-production-2fcb.up.railway.app/api/insignias", formData)
           .then((response) => {
             // Maneja la respuesta del backend, por ejemplo, muestra un mensaje de éxito
             console.log("Registro de insignia creado con éxito:", response.data);
@@ -142,12 +149,49 @@ export default {
             this.titulo = "";
             this.descripcion = "";
             this.imagenInput = null;
+            this.imagenPrevia = null;
             this.tipo = "";
             this.actividad = "";
           })
           .catch((error) => {
             console.error("Error al crear el registro de insignia:", error);
             // Maneja el error
+          });
+    },
+    submitPatch(){
+      const insigniaActualizada = {
+        titulo: this.titulo,
+        descripcion: this.descripcion,
+        imageUrl: this.imagenInput,
+        tipo: this.tipo,
+        actividad: this.actividad,
+      };
+
+      if (!this.idInsignia) {
+        console.error("ID de insignia no válido.");
+        return;
+      }
+
+      axios
+          .patch(
+              `http://backend-clipp-production-2fcb.up.railway.app/api/insignias/${this.idInsignia}`,
+              insigniaActualizada
+          )
+          .then((response) => {
+            // Maneja la respuesta de éxito según tus necesidades
+            console.log("Solicitud PATCH exitosa:", response.data);
+
+            // Puedes restablecer el formulario después de la actualización
+            this.titulo = "";
+            this.descripcion = "";
+            this.imagenInput = null;
+            this.imagenPrevia = null;
+            this.tipo = "";
+            this.actividad = "";
+          })
+          .catch((error) => {
+            // Maneja los errores de la solicitud PATCH según tus necesidades
+            console.error("Error en la solicitud PATCH:", error);
           });
     },
     actualizarActividadId(id) {
@@ -161,7 +205,7 @@ export default {
     actualizarInsignia(insignia) {
       this.idInsignia = insignia.id;
       axios
-          .get(`https://backend-clipp-production.up.railway.app/api/insignias/${this.idInsignia}`
+          .get(`http://backend-clipp-production-2fcb.up.railway.app/api/insignias/${this.idInsignia}`
           )
           .then((response) => {
             this.titulo = response.data.titulo
@@ -175,6 +219,30 @@ export default {
             console.error("Error al obtener el beneficio:", error);
           })
       console.log("Actividad:", this.actividad)
+    },
+    eliminarInsignia(){
+      if (!this.idInsignia){
+        console.error("ID de insignia no valido.");
+        return;
+      }
+
+      // Realiza la solicitud DELETE al servidor
+      axios
+          .delete(`http://backend-clipp-production-2fcb.up.railway.app/api/insignias/${this.idInsignia}`
+          )
+          .then((response) => {
+            console.log("Solicitud DELETE exitosa: ", response.data);
+
+            this.titulo = "";
+            this.descripcion = "";
+            this.imagenInput = null;
+            this.imagenPrevia = null;
+            this.tipo = "";
+            this.actividad = "";
+          })
+          .catch((error) => {
+            console.error("Error en la solicitud DELETE:", error);
+          });
     },
     openModal() {
       this.showModal = true; // Abre el modal cuando se hace clic en el botón

@@ -109,7 +109,7 @@ export default {
     },
   },
   mounted() {
-    axios.get("https://backend-clipp-production.up.railway.app/api/actividades")
+    axios.get("http://backend-clipp-production-2fcb.up.railway.app/api/actividades")
         .then((response) => {
           // Actualiza la lista de insignias con los datos obtenidos del backend
           this.listaInsignias = response.data;

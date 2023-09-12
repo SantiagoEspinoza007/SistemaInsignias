@@ -44,7 +44,7 @@
                   class="button-global text-[#2794F8]" type="button"
                   @click="editarBeneficio"
           >
-            <span>Editar</span>
+            <span>Actualizar</span>
           </button>
           <button :disabled="!formularioCompleto"
                   :class="{'button-block': !formularioCompleto}"
@@ -96,7 +96,7 @@ export default {
 
       // Realiza una solicitud POST al backend para crear el registro de insignia
       axios
-          .post("https://backend-clipp-production.up.railway.app/api/beneficios", formData)
+          .post("http://backend-clipp-production-2fcb.up.railway.app/api/beneficios", formData)
           .then((response) => {
             // Maneja la respuesta del backend, por ejemplo, muestra un mensaje de éxito
             console.log("Beneficio creado con éxito:", response.data);
@@ -118,7 +118,7 @@ export default {
       this.idBeneficio = beneficio.id;
 
       axios
-          .get(`https://backend-clipp-production.up.railway.app/api/beneficios/${this.idBeneficio}`
+          .get(`http://backend-clipp-production-2fcb.up.railway.app/api/beneficios/${this.idBeneficio}`
           )
           .then((response) => {
             this.titulo = response.data.titulo
@@ -152,7 +152,7 @@ export default {
       // Realiza la solicitud PATCH al servidor
       axios
           .patch(
-              `https://backend-clipp-production.up.railway.app/api/beneficios/${this.idBeneficio}`,
+              `http://backend-clipp-production-2fcb.up.railway.app/api/beneficios/${this.idBeneficio}`,
               beneficioActualizado
           )
           .then((response) => {
@@ -178,10 +178,10 @@ export default {
         return;
       }
 
-      // Realiza la solicitud PATCH al servidor
+      // Realiza la solicitud DELETE al servidor
       axios
           .delete(
-              `https://backend-clipp-production.up.railway.app/api/beneficios/${this.idBeneficio}`
+              `http://backend-clipp-production-2fcb.up.railway.app/api/beneficios/${this.idBeneficio}`
           )
           .then((response) => {
             // Maneja la respuesta de éxito según tus necesidades

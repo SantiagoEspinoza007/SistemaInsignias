@@ -4,7 +4,8 @@
       <h3 class="font-bold text-lg">Publicidad</h3>
       <div class="contenido flex">
         <div class="publicidad-labels mt-4">
-          <h4 class="mb-6">Imágen</h4>
+          <h4 class="mt-2">Imágen</h4>
+          <h4 class="mt-36 ">Rutas</h4>
         </div>
         <div class="publicidad-inputs w-[75%] mb-4">
           <div class="cargarImagen flex">
@@ -22,6 +23,13 @@
               </label>
             </div>
           </div>
+          <DropdownMenuW :options="optionsRutas"
+                         class="despegable-global w-[45%]"
+                         id="rutas"
+                         v-model="ruta"
+                         placeholder="Selecciona una ruta"
+                         @option-selected="updateRuta"
+          />
         </div>
         <div class="publicidad-botones flex flex-col items-end mt-2">
           <button :disabled="!formularioCompleto"
@@ -46,26 +54,35 @@
 <script>
 import axios, {Axios} from "axios";
 import publicidadModal from "@/components/publicidadModal.vue";
+import DropdownMenuW from "@/components/DropdownMenuW.vue";
 
 export default {
-  components: {publicidadModal},
+  components: {DropdownMenuW, publicidadModal},
   data() {
     return {
+      ruta: "",
+      imagenUrl: '',
       imagen: null,
       imagenPrevia: null,
       idPublicidad: null,
+      optionsRutas: ['home', 'profile', 'badge', 'ktaxi', 'coupons', 'activities'],
     };
   },
   methods: {
     submitForm() {
+      console.log("Datos del formulario Publicidad: ", this.imagenUrl, this.ruta);
+
       const formData = new FormData();
       formData.append('imagenUrl', this.$refs.imagenPreviaInput.files[0]);
+      formData.append('ruta', this.ruta);
 
       // Realizar la solicitud al backend utilizando axios u otra librería similar
-      axios.post("https://backend-clipp-production.up.railway.app/api/publicidad", formData)
+      axios
+          .post("http://backend-clipp-production-2fcb.up.railway.app/api/publicidad", formData)
           .then(response => {
             console.log("Publicidad Creada con exito:", response.data);
-            this.imagenPrevia = null;
+            this.imagenInput = null;
+            this.ruta = "";
           })
           .catch(error => {
             console.error("Error al crear la publicidad", error);
@@ -100,29 +117,30 @@ export default {
       }
       const archivoInputValue = this.$refs.imagenPreviaInput.value;
       // // Agregar console.log para verificar las propiedades
-      // console.log("imagenPrevia:", this.imagenPrevia);
+      console.log("imagenPrevia:", this.imagenPrevia);
     },
-    actualizarPublicidad(publicidad){
+    actualizarPublicidad(publicidad) {
       this.idPublicidad = publicidad.id;
 
       axios
-          .get(`https://backend-clipp-production.up.railway.app/api/publicidad/${this.idPublicidad}`
+          .get(`http://backend-clipp-production-2fcb.up.railway.app/api/publicidad/${this.idPublicidad}`
           )
           .then((response) => {
             this.imagenPrevia = response.data.imagenUrl;
+            this.ruta = response.data.ruta;
           })
           .catch((error) => {
             console.error("Error al obtener la publicidad: ", error);
           })
     },
-    eliminarPublicidad(){
-      if(!this.idPublicidad){
+    eliminarPublicidad() {
+      if (!this.idPublicidad) {
         console.error("ID de publicidad no valido");
         return;
       }
 
       axios
-          .delete(`https://backend-clipp-production.up.railway.app/api/publicidad/${this.idPublicidad}`
+          .delete(`http://backend-clipp-production-2fcb.up.railway.app/api/publicidad/${this.idPublicidad}`
           )
           .then((response) => {
             console.log("Solicitud de DELETE exitosa:", response.data);
@@ -132,12 +150,16 @@ export default {
           .catch((error) => {
             console.error("Error en la solicitud DELETE")
           })
+    },
+    updateRuta(option) {
+      this.ruta = option;
     }
   },
   computed: {
     formularioCompleto() {
       return (
-          (this.imagenPrevia !== null)
+          (this.imagenPrevia !== null) &&
+          (this.ruta !== null)
       );
     }
   }
@@ -170,5 +192,11 @@ export default {
 
 .hidden {
   display: none;
+}
+
+.despegable-global {
+  margin-left: 25px;
+  margin-top: 10px;
+  position: relative;
 }
 </style>

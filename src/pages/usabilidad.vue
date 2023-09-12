@@ -93,29 +93,8 @@
           </div>
         </div>
         <div class="cont-f flex-col ml-10 justify-center">
-          <div class="despegable-FFC w-40 mb-10">
-            <div class="select-DSC" @click="toggleDropdown('dropdownFFC')">
-              <span>Fecha</span>
-              <div
-                :class="{
-                  'flecha-DSC': true,
-                  'flecha-rotate-DSC': dropdowns.dropdownFFC,
-                }"
-              ></div>
-            </div>
-            <ul
-              :class="{
-                'menu-DSC': true,
-                'menu-DSC-open': dropdowns.dropdownFFC,
-              }"
-            >
-              <li class="active-DSC">Fecha 1</li>
-              <li>Fecha 2</li>
-              <li>Fecha 2</li>
-              <li>Fecha 3</li>
-            </ul>
-          </div>
-          <div class="FchartCard text-gray-600 mb-10">
+          <input class="inputFechaU w-56" type="date">
+          <div class="FchartCard text-gray-600 mt-20 mb-10">
             <ChartComponent2 />
           </div>
           <table class="table-auto bg-white rounded-md">
@@ -276,5 +255,13 @@ export default {
 
 .insignia {
   padding: 10px 5px 10px 5px;
+}
+
+.inputFechaU {
+  position: absolute;
+  border: 2px solid #ffffff;
+  border-radius: 8px;
+  height: 45px;
+  padding: 5px;
 }
 </style>

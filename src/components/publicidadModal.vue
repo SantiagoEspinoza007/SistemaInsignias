@@ -11,7 +11,7 @@
   </transition>
 
   <transition name="fade">
-    <div class="modal w-[500px] h-[250px]" v-if="showModal">
+    <div class="modal w-[500px] h-[300px]" v-if="showModal">
       <p class="mb-4 font-extrabold">Buscar Publicidad</p>
       <div class="publicidad-img rounded-md bg-white w-[450px] p-2">
         <table id="tabla" class="table-auto rounded-md bg-white p-4">
@@ -20,13 +20,18 @@
           </tr>
           <tr>
             <td class="border px-8"
-                v-for="(publicidad, index) in listaPublicidad"
+                v-for="(publicidad, index) in itemsPaginaActual"
                 :key="index"
                 @dblclick="enviarTexto(publicidad), showModal = false">
               <img :src="publicidad.imagenUrl" alt="publicidad" width="75" height="75">
             </td>
           </tr>
         </table>
+        <div class="paginacion">
+          <button type="button" v-if="paginaActual > 1" @click="paginaActual--;">Anterior Pagina</button>
+          <span>{{ paginaActual }}</span>
+          <button type="button" v-if="paginaActual < totalPaginas" @click="paginaActual++;">Siguiente Pagina</button>
+        </div>
       </div>
       <button @click="showModal=false" class="modalButtom mt-6" type="button">
         <span>Cancelar</span>
@@ -48,10 +53,26 @@ export default {
       showModal: false,
       listaPublicidad: [],
       modalVisible: false,
+      paginaActual: 1,
+      elementosPorPagina: 3,
     };
   },
+  computed: {
+    totalPaginas() {
+      return Math.ceil(this.listaPublicidad.length / this.elementosPorPagina);
+    },
+    primerIndicePagina() {
+      return (this.paginaActual - 1) * this.elementosPorPagina;
+    },
+    ultimoIndicePagina() {
+      return this.paginaActual * this.elementosPorPagina;
+    },
+    itemsPaginaActual() {
+      return this.listaPublicidad.slice(this.primerIndicePagina, this.ultimoIndicePagina);
+    },
+  },
   mounted() {
-    axios.get("https://backend-clipp-production.up.railway.app/api/publicidad")
+    axios.get("http://backend-clipp-production-2fcb.up.railway.app/api/publicidad")
         .then((response) => {
           this.listaPublicidad = response.data;
         })
@@ -105,6 +126,24 @@ export default {
 
 .hidden {
   display: none;
+}
+
+.paginacion {
+  color: #cccccc;
+  display: flex;
+  justify-content: space-between;
+}
+
+.paginacion button {
+  color: #cccccc;
+  margin-bottom: 20px;
+  background-color: white;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+  width: 150px;
+  height: 35px;
 }
 
 .modalButtom {

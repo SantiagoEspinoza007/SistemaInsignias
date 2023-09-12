@@ -103,6 +103,7 @@ export default {
     },
     enviarItem(insignia) {
       this.$emit("enviarInsignia", insignia)
+      this.$emit('enviarActividadTitulo', insignia.actividad.nombre);
       this.showModal2 = false;
     },
     updateTipo(option) {
@@ -141,7 +142,7 @@ export default {
     }
   },
   mounted() {
-    axios.get("https://backend-clipp-production.up.railway.app/api/insignias")
+    axios.get("http://backend-clipp-production-2fcb.up.railway.app/api/insignias")
         .then((response) => {
           this.tableOptions = response.data;
           this.paginas1 = this.totalPaginas1;
