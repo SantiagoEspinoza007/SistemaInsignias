@@ -212,7 +212,7 @@ export default {
             this.descripcion = response.data.descripcion;
             this.tipo = response.data.tipo;
             this.servicio = "KTaxi";
-            this.actividad = response.data.actividad.titulo;
+            this.actividad = response.data.actividad.nombre;
             this.imagenPrevia = response.data.imagenUrl;
           })
           .catch((error) => {

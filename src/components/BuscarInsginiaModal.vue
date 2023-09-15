@@ -118,7 +118,7 @@ export default {
       // console.log("TipoInsigniaSeleccionada:", this.tipoInsigniaSeleccionada);
       return this.tableOptions.filter(item =>
           (item.titulo.toLowerCase().includes(busqueda) || busqueda === '') &&
-          (this.tipoInsigniaSeleccionada === '' || item.tipo === this.tipoInsigniaSeleccionada)
+          (this.tipoInsigniaSeleccionada === '' || item.tipo.toLowerCase() === this.tipoInsigniaSeleccionada)
       );
     },
     totalPaginas1() {
