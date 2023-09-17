@@ -78,28 +78,13 @@
             </h3>
             <p class="text-lg mb-2 text-center">TOP 5 más obtenidas</p>
             <div class="grid grid-cols-5">
-              <div class="insignia">
-                <p class="text-base text-center m-1">Ktaxi</p>
-                <img src="../../img/20taxis.png" alt="20 Taxis" class="" />
+              <div class="insignia" v-for = "(item, index) in insigniasFidelizacion" :key ="index">
+                <p class="text-base text-center m-1 h-[40px]">{{ item.titulo }}</p>
+                <img :src="item.imagenUrl" alt="Insignia" width="45" height="45">
                 <p class="text-xs text-center mt-2">
-                  Has completado 20 viajes en Taxis
+                  {{item.descripcion}}
                 </p>
               </div>
-              <div class="insignia">
-                <p class="text-center text-base m-1">Delivery</p>
-                <img src="../../img/formaPago.png" alt="Forma de Pago" />
-                <p class="text-xs text-center mt-2">
-                  Usaste una forma diferente de pago
-                </p>
-              </div>
-              <div class="insignia">
-                <p class="text-base text-center m-1">Servicio</p>
-                <img src="../../img/30km.png" alt="30 Km" />
-                <p class="text-xs text-center mt-2">
-                  Llegaste a 30 Km recorridos
-                </p>
-              </div>
-              
             </div>
             <router-link to="/fidelizacion" class="verInsignias">
               <div class="verInsignias-content">
@@ -113,24 +98,13 @@
             </h3>
             <p class="text-lg mb-2 text-center">TOP 5 más obtenidas</p>
             <div class="grid grid-cols-5">
-              <div class="insignia">
-                <img
-                  src="../../img/numCelular.png"
-                  alt="validar celular"
-                  class=""
-                />
-                <p class="text-xs text-center mt-2">Validar número celular</p>
-              </div>
-              <div class="insignia">
-                <img
-                  src="../../img/tarjetaDebito.png"
-                  alt="tarjeta credito/debito"
-                />
+              <div class="insignia" v-for = "(item, index) in insigniasUsabilidad" :key ="index">
+                <p class="text-base text-center m-1 h-[40px]">{{ item.titulo }}</p>
+                <img :src="item.imagenUrl" alt="Insignia" width="45" height="45">
                 <p class="text-xs text-center mt-2">
-                  Agregar tarjeta crédito/debito
+                  {{item.descripcion}}
                 </p>
               </div>
-              
             </div>
             <router-link to="/usabilidad" class="verInsignias">
               <div class="verInsignias-content">
@@ -138,64 +112,8 @@
               </div>
             </router-link>
           </div>
-          <div class="table rounded-md">
-            <table class="table-auto rounded-md bg-white">
-              <thead>
-                <tr>
-                  <th class="px-4 py-1">Usuarios</th>
-                  <th class="px-4 py-1">KTaxi</th>
-                  <th class="px-4 py-1">Delivery</th>
-                  <th class="px-4 py-1">Otro</th>
-                  <th class="px-4 py-1">Total Insiginias</th>
-                  <th class="px-4 py-1">Total Beneficios</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="user in users" :key="user.usuario_nombre">
-                  <td class="border px-4 py-1">{{ user.usuario_nombre }}</td>
-                  <td class="border px-4 py-1">{{ user.total_insignias }}</td>
-                  <td class="border px-4 py-1">{{ user.Delivery }}</td>
-                  <td class="border px-4 py-1">{{ user.otro }}</td>
-                  <td class="border px-4 py-1">
-                    {{ totalInsigniasObtenidas(user) }}
-                  </td>
-                  <td class="border px-4 py-1">{{ user.total_beneficios }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
         </div>
         <div class="contF-U ml-16 p-5 space-y-10 flex-col justify-center">
-          <div class="chartF mb-4 flex">
-            <div class="headersF flex mb-2">
-              <div class="despegable-SC absolute w-56">
-                <div class="select-DSC" @click="toggleDropdown('dropdownSCU')">
-                  <span>Todos los Servicios</span>
-                  <div
-                      :class="{
-                      'flecha-DSC': true,
-                      'flecha-rotate-DSC': dropdowns.dropdownSCU,
-                    }"
-                  ></div>
-                </div>
-                <ul
-                    :class="{
-                    'menu-DSC': true,
-                    'menu-DSC-open': dropdowns.dropdownSCU,
-                  }"
-                >
-                  <li>Servicio 1</li>
-                  <li>Servicio 2</li>
-                  <li>Servicio 3</li>
-                  <li class="active-DSC">Todos los Servicios</li>
-                </ul>
-              </div>
-              <input class="inputFecha w-56 block" type="date">
-            </div>
-            <div class="cardChart flex-col mt-16">
-              <ChartActividades></ChartActividades>
-            </div>
-          </div>
           <div class="chartU flex">
             <div class="headersU flex-col mb-2">
               <div class="despegable-SC absolute w-56">
@@ -225,6 +143,33 @@
             <div class="cardChart flex-col mt-16">
               <CharInsignias />
             </div>
+
+          </div>
+          <div class="table rounded-md">
+            <table class="table-auto rounded-md bg-white">
+              <thead>
+              <tr>
+                <th class="px-4 py-1">Usuarios</th>
+                <th class="px-4 py-1">KTaxi</th>
+                <th class="px-4 py-1">Delivery</th>
+                <th class="px-4 py-1">Servicio</th>
+                <th class="px-4 py-1">Total Insiginias</th>
+                <th class="px-4 py-1">Total Beneficios</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr v-for="user in users" :key="user.usuario_nombre">
+                <td class="border px-4 py-1">{{ user.usuario_nombre }}</td>
+                <td class="border px-4 py-1">{{ user.total_insignias }}</td>
+                <td class="border px-4 py-1">0</td>
+                <td class="border px-4 py-1">0</td>
+                <td class="border px-4 py-1">
+                  {{ totalInsigniasObtenidas(user) }}
+                </td>
+                <td class="border px-4 py-1">{{ user.total_beneficios }}</td>
+              </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -243,6 +188,8 @@ export default {
   data() {
     return {
       insignias: [],
+      insigniasFidelizacion: [],
+      insigniasUsabilidad: [],
       users: [],
       currentPage: "",
       dropdowns: {
@@ -262,6 +209,18 @@ export default {
   mounted() {
     this.currentPage = this.$route.path;
     this.fetchData();
+    axios.get("http://backend-clipp-production-2fcb.up.railway.app/api/insignias")
+        .then((response) => {
+          this.insignias = response.data;
+
+          // Dividir las insignias en dos conjuntos diferentes
+          this.insigniasFidelizacion = this.insignias.filter((insignia) => insignia.tipo === "fidelización");
+          this.insigniasUsabilidad = this.insignias.filter((insignia) => insignia.tipo === "usabilidad");
+          console.log("Insginias Fidelizacion: ", this.insigniasFidelizacion)
+        })
+        .catch((error) => {
+          console.error("Error al obtener las insignias: ", error);
+        });
   },
   methods: {
     toggleDropdown(dropdown) {
@@ -272,7 +231,7 @@ export default {
     },
     async fetchData() {
       try {
-        const response = await axios.get("https://backend-clipp-production.up.railway.app/api/consultas/top");
+        const response = await axios.get("http://backend-clipp-production-2fcb.up.railway.app/api/consultas/top");
         this.users = response.data;
         console.log(this.users)
       } catch (error) {

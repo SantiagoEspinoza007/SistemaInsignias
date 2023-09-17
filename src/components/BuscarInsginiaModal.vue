@@ -35,12 +35,13 @@
           <thead>
           <tr>
             <th class="hidden">ID</th>
-            <th>Insignia</th>
-            <th>Titulo</th>
+            <th>Título</th>
+            <th>Descripción</th>
             <th>Tipo</th>
+            <th>Servicio</th>
             <th class="hidden">IDActividad</th>
             <th>Actividad Asignada</th>
-            <th>Cantidad</th>
+            <th>Insignia</th>
           </tr>
           </thead>
           <tbody>
@@ -49,14 +50,16 @@
               @dblclick="enviarItem(item), showModal2 = false"
           >
             <td class="hidden">{{ item.id }}</td>
+            <td class="border px-8 py-2">{{ item.titulo }}</td>
+            <td class="border px-8 py-2">{{ item.descripcion }}</td>
+            <td class="border px-8 py-2">{{ item.tipo[0].toUpperCase() + item.tipo.slice(1).toLowerCase() }}</td>
+            <td class="border px-8 py-2">KTaxi</td>
+            <td class="hidden" v-if="item.actividad !== null">{{ item.actividad.id }}</td>
+            <td class="border px-8 py-2" v-if="item.actividad !== null">{{ item.actividad.nombre }}</td>
+            <td class="border px-8 py-2" v-else>No tiene</td>
             <td class="border px-8">
               <img :src="item.imagenUrl" alt="Insignia" width="45" height="45">
             </td>
-            <td class="border px-8 py-2">{{ item.titulo }}</td>
-            <td class="border px-8 py-2">{{ item.tipo }}</td>
-            <td class="hidden">{{ item.actividad.id }}</td>
-            <td class="border px-8 py-2">{{ item.actividad.nombre }}</td>
-            <td class="border px-8 py-2">{{ item.actividad.total }}</td>
           </tr>
           </tbody>
         </table>
@@ -103,7 +106,9 @@ export default {
     },
     enviarItem(insignia) {
       this.$emit("enviarInsignia", insignia)
-      this.$emit('enviarActividadTitulo', insignia.actividad.nombre);
+      if (insignia.actividad !== null) {
+        this.$emit('enviarActividadTitulo', insignia.actividad.nombre);
+      }
       this.showModal2 = false;
     },
     updateTipo(option) {

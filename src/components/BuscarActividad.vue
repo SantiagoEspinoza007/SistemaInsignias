@@ -15,14 +15,14 @@
       <p class="mb-4 font-extrabold">Buscar Actividad</p>
       <!-- Barra de búsqueda -->
       <div class="search-bar justify-center w-[500px]">
-        <input type="text" v-model="busqueda" placeholder="Ingrese el titulo de la actividad">
+        <input type="text" v-model="busqueda" placeholder="Ingrese el título de la actividad">
       </div>
       <div class="table-Modal flex flex-col">
         <table id="tabla" class="table-auto rounded-md bg-white mb-4">
           <thead>
           <tr>
             <th class="hidden px-8 py-2">ID</th>
-            <th class="px-8 py-2">Titulo</th>
+            <th class="px-8 py-2">Título</th>
             <th class="px-8 py-2">Cantidad</th>
             <th class="px-8 py-2">Descripción</th>
           </tr>

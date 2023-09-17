@@ -1,10 +1,10 @@
 <template>
   <div class="form-actividades rounded-md bg-white w-[600px] p-2 mb-10">
-    <form @submit.prevent="submitForm">
+    <form @submit.prevent="onFormSubmit">
       <h2 class="font-bold text-lg">Actividades</h2>
       <div class="contenido flex">
         <div class="actividades-labels mt-4">
-          <h4 class="mb-6">Titulo</h4>
+          <h4 class="mb-6">Título</h4>
           <h4 class="mb-6">Cantidad</h4>
           <h4 class="mb-6">Descripción</h4>
         </div>
@@ -33,7 +33,9 @@
           </button>
           <button :disabled="!formularioCompleto"
                   :class="{'button-block': !formularioCompleto}"
-                  class="button-global text-[#2794F8]" type="submit">
+                  class="button-global text-[#2794F8]"
+                  type="submit"
+          >
             <span>Guardar</span>
           </button>
           <buscar-actividad @enviarActividad="cargarActividad"></buscar-actividad>
@@ -57,6 +59,15 @@ export default {
     };
   },
   methods: {
+    onFormSubmit(event) {
+      // Realiza las acciones necesarias, por ejemplo, enviar datos al servidor
+      this.submitForm();
+
+      // Espera 1 segundo antes de recargar la página (ajusta el tiempo según sea necesario)
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500); // 1000 milisegundos = 1 segundo
+    },
     submitForm() {
       // Aquí puedes realizar acciones con los datos del formulario,
       // como enviar una solicitud HTTP, procesar datos, etc.
@@ -87,23 +98,6 @@ export default {
             console.error("Error en la solicitud POST:", error);
           });
 
-      // if (this.idActividad) {
-      //   // Hacer una solicitud GET al backend para obtener la actividad
-      //   axios
-      //       .get(
-      //           `https://backend-clipp-production.up.railway.app/api/actividades/${this.idActividad}`
-      //       )
-      //       .then((response) => {
-      //         // Rellenar los campos del formulario con la información obtenida
-      //         this.titulo = response.data.nombre;
-      //         this.cantidad = response.data.total.toString();
-      //         this.descripcion = response.data.descripcion;
-      //       })
-      //       .catch((error) => {
-      //         console.error("Error al obtener la actividad:", error);
-      //         // Maneja el error según tus necesidades.
-      //       });
-      // }
     },
     cargarActividad(actividad) {
       // Aquí guardamos el ID de la actividad seleccionada

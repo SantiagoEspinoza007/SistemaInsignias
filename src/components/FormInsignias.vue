@@ -1,6 +1,6 @@
 <template>
   <div class="form-insignias rounded-md bg-white w-[600px] p-2">
-    <form @submit.prevent="submitForm">
+    <form @submit.prevent="onFormSubmit">
       <h2 class="font-bold text-lg">Insignias</h2>
       <div class="contenido flex">
         <div class="insignias-labels mt-4">
@@ -8,7 +8,7 @@
           <h4 class="mb-8 ">Descripción</h4>
           <h4 class="mb-8">Tipo/Servicio</h4>
           <h4 class="mb-6">Actividad</h4>
-          <h4 class="mb-6">Imágen</h4>
+          <h4 class="mb-6">Imagen</h4>
         </div>
         <div class="insignias-inputs w-[75%] mb-4">
           <input class="input-global" id="titulo" v-model="titulo" type="text" placeholder="Nombre de la insignia">
@@ -38,7 +38,7 @@
                    :readonly="bloquearInput"
                    placeholder="Busca la actividad">
 
-            <insignia-modal :fila="actividad"
+            <insignia-modal v-if="showInsigniaModal" :fila="actividad"
                             @enviarActividadId="actualizarActividadId"
                             @enviarActividadTitulo="actualizarActividadTitulo"/>
           </div>
@@ -116,13 +116,22 @@ export default {
       optionsTipo: ['Fidelización', 'Usabilidad'],
       optionsServicio: ['KTaxi'],
       bloquearInput: true,
-      showModal: false,
+      showInsigniaModal: true,
       idInsignia: null,
       insigniaSelect: null,
     };
   },
 
   methods: {
+    onFormSubmit(event) {
+      // Realiza las acciones necesarias, por ejemplo, enviar datos al servidor
+      this.submitForm();
+
+      // Espera 1 segundo antes de recargar la página (ajusta el tiempo según sea necesario)
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500); // 1000 milisegundos = 1 segundo
+    },
     submitForm() {
       // Crea un objeto con los datos del formulario
       console.log("Datos del formulario:", this.titulo,
@@ -132,9 +141,10 @@ export default {
       formData.append('titulo', this.titulo);
       formData.append('descripcion', this.descripcion);
       formData.append('imagenUrl', this.$refs.imagenInput.files[0]);
-      formData.append('tipo', this.tipo.toLowerCase());
-      formData.append('actividadId', this.actividadId);
-
+      formData.append('tipo', this.tipo);
+      if (this.tipo !== "usabilidad"){
+        formData.append('actividadId', this.actividadId);
+      }
 
       console.log(formData)
 
@@ -152,6 +162,8 @@ export default {
             this.imagenPrevia = null;
             this.tipo = "";
             this.actividad = "";
+            this.actividadId = "";
+
           })
           .catch((error) => {
             console.error("Error al crear el registro de insignia:", error);
@@ -164,7 +176,7 @@ export default {
         descripcion: this.descripcion,
         imageUrl: this.imagenInput,
         tipo: this.tipo,
-        actividad: this.actividad,
+        actividadId: this.actividadId,
       };
 
       if (!this.idInsignia) {
@@ -188,6 +200,7 @@ export default {
             this.imagenPrevia = null;
             this.tipo = "";
             this.actividad = "";
+            this.actividadId = null;
           })
           .catch((error) => {
             // Maneja los errores de la solicitud PATCH según tus necesidades
@@ -212,7 +225,9 @@ export default {
             this.descripcion = response.data.descripcion;
             this.tipo = response.data.tipo;
             this.servicio = "KTaxi";
-            this.actividad = response.data.actividad.nombre;
+            if (this.tipo !== "Usabilidad") {
+              this.actividad = response.data.actividad.nombre;
+            }
             this.imagenPrevia = response.data.imagenUrl;
           })
           .catch((error) => {
@@ -239,13 +254,11 @@ export default {
             this.imagenPrevia = null;
             this.tipo = "";
             this.actividad = "";
+            this.actividadId = null;
           })
           .catch((error) => {
             console.error("Error en la solicitud DELETE:", error);
           });
-    },
-    openModal() {
-      this.showModal = true; // Abre el modal cuando se hace clic en el botón
     },
     previsualizarImagen(event) {
       const archivo = event.target.files[0];
@@ -281,7 +294,12 @@ export default {
       console.log("imagenPrevia:", this.imagenPrevia);
     },
     updateTipo(option) {
-      this.tipo = option;
+      this.tipo = option.toLowerCase();
+      if (option === "Usabilidad") {
+        this.showInsigniaModal = false;
+      } else {
+        this.showInsigniaModal = true;
+      }
     },
     updateServicio(option) {
       this.servicio = option;
@@ -289,6 +307,7 @@ export default {
     actualizarActividad(fila) {
       this.actividad = fila;
     }
+
   },
   computed: {
     formularioCompleto() {
@@ -296,7 +315,6 @@ export default {
           (this.titulo === undefined || this.titulo.trim() !== '') &&
           (this.descripcion === undefined || this.descripcion.trim() !== '') &&
           (this.tipo !== null) &&
-          (this.actividad !== null) &&
           (this.imagenPrevia !== null)
       );
     }

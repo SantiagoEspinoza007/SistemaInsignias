@@ -1,10 +1,10 @@
 <template>
   <div class="form-publicidad rounded-md bg-white w-[600px] p-4 mb-4">
-    <form @submit.prevent="submitForm">
+    <form @submit.prevent="onFormSubmit">
       <h3 class="font-bold text-lg">Publicidad</h3>
       <div class="contenido flex">
         <div class="publicidad-labels mt-4">
-          <h4 class="mt-2">Imágen</h4>
+          <h4 class="mt-2">Imagen</h4>
           <h4 class="mt-36 ">Rutas</h4>
         </div>
         <div class="publicidad-inputs w-[75%] mb-4">
@@ -69,6 +69,15 @@ export default {
     };
   },
   methods: {
+    onFormSubmit(event) {
+      // Realiza las acciones necesarias, por ejemplo, enviar datos al servidor
+      this.submitForm();
+
+      // Espera 1 segundo antes de recargar la página (ajusta el tiempo según sea necesario)
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500); // 1000 milisegundos = 1 segundo
+    },
     submitForm() {
       console.log("Datos del formulario Publicidad: ", this.imagenUrl, this.ruta);
 
@@ -82,6 +91,7 @@ export default {
           .then(response => {
             console.log("Publicidad Creada con exito:", response.data);
             this.imagenInput = null;
+            this.imagenPrevia = null;
             this.ruta = "";
           })
           .catch(error => {

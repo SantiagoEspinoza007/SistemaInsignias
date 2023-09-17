@@ -1,14 +1,14 @@
 <template>
   <div class="form-cupones rounded-md bg-white w-[600px] p-4">
-    <form @submit.prevent="submitForm">
+    <form @submit.prevent="onFormSubmit">
       <h3 class="mb-4 font-bold text-lg">Cupones</h3>
       <div class="contenido flex">
         <div class="cupones-labels ">
-          <h4 class="mt-2 mb-4">Titulo</h4>
+          <h4 class="mt-2 mb-4">Título</h4>
           <h4 class="mb-6">% de Descuento</h4>
-          <h4 class="mb-6">Descripcion</h4>
+          <h4 class="mb-6">Descripción</h4>
           <h4 class="mb-6">Fecha/Tiempo</h4>
-          <h4 class="mb-6">Imágen</h4>
+          <h4 class="mb-6">Imagen</h4>
         </div>
         <div class="cupones-inputs w-[75%] mb-4">
           <input class="input-global" type="text" id="titulo" v-model="titulo" placeholder="Titulo del Beneficio">
@@ -68,7 +68,7 @@ export default {
       titulo: '',
       porceDescuento: '',
       descripcion: '',
-      cupon: "KTaxi",
+      cupon: "KTAXI",
       fecha: '',
       tiempo: '',
       imagen: null,
@@ -77,6 +77,15 @@ export default {
     };
   },
   methods: {
+    onFormSubmit(event) {
+      // Realiza las acciones necesarias, por ejemplo, enviar datos al servidor
+      this.submitForm();
+
+      // Espera 1 segundo antes de recargar la página (ajusta el tiempo según sea necesario)
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500); // 1000 milisegundos = 1 segundo
+    },
     submitForm() {
       // Aquí puedes realizar acciones con los datos del formulario,
       // como enviar una solicitud HTTP, procesar datos, etc.

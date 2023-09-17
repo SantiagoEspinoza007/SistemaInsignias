@@ -16,13 +16,14 @@
       <p class="mb-4 font-extrabold">Buscar Cupón</p>
       <!-- Barra de búsqueda -->
       <div class="search-bar justify-center w-[700px]">
-        <input type="text" v-model="busqueda" placeholder="Ingrese la descripción del cupón">
+        <input type="text" v-model="busqueda" placeholder="Ingrese el título del cupón">
       </div>
       <div class="table-Modal flex flex-col">
         <table id="tabla" class="table-auto rounded-md bg-white mb-4">
           <thead>
           <tr>
             <th class="hidden px-8 py-2">ID</th>
+            <th class="px-8 py-2">Titulo</th>
             <th class="px-8 py-2">%</th>
             <th class="px-8 py-2">Descripción</th>
             <th class="px-8 py-2">Fecha</th>
@@ -35,6 +36,7 @@
               @dblclick="enviarTexto(beneficio), showModal = false"
           >
             <td class="hidden border px-8 py-2">{{ beneficio.id }}</td>
+            <td class="titulo border px-8 py-2">{{ beneficio.titulo }}</td>
             <td class="titulo border px-8 py-2">{{ beneficio.descuento }}</td>
             <td class="border px-8 py-2">{{ beneficio.descripcion }}</td>
             <td class="border px-8 py-2">{{ beneficio.fecha }}</td>
@@ -83,7 +85,7 @@ export default {
     filtrarBeneficios() {
       const busqueda = this.busqueda.toLowerCase();
       return this.listaBeneficios.filter(beneficio =>
-          beneficio.descripcion.toLowerCase().includes(busqueda)
+          beneficio.titulo.toLowerCase().includes(busqueda)
       );
     },
     totalPaginas() {

@@ -161,7 +161,7 @@ export default {
   mounted() {
     this.fetchUsersData();
     const apiUrl =
-      "https://backend-clipp-production.up.railway.app/api/insignias";
+      "http://backend-clipp-production-2fcb.up.railway.app/api/insignias";
 
     axios.get(apiUrl).then((response) => {
       this.insignias = response.data;
@@ -175,7 +175,7 @@ export default {
     },
     async fetchUsersData() {
       try {
-        const response = await axios.get("https://backend-clipp-production.up.railway.app/api/consultas/tabla");
+        const response = await axios.get("http://backend-clipp-production-2fcb.up.railway.app/api/consultas/tabla");
         console.log(response.data)
         this.users = response.data;
       } catch (error) {
