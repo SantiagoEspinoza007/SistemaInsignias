@@ -87,7 +87,7 @@ export default {
     async fetchData() {
       try {
         const response = await axios.get(
-          "https://backend-clipp-production.up.railway.app/api/consultas/insignias"
+          "http://backend-clipp-production-2fcb.up.railway.app/api/consultas/insignias"
         );
         console.log(response.data)
         const data = response.data;

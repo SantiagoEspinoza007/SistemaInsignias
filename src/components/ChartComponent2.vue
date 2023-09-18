@@ -88,7 +88,7 @@
       async fetchData() {
         try {
           const response = await axios.get(
-            "https://backend-clipp-production.up.railway.app/api/consultas/top-usabilidad"
+            "http://backend-clipp-production-2fcb.up.railway.app/api/consultas/top-usabilidad"
           );
           const data = response.data;
   

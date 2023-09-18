@@ -148,7 +148,7 @@ export default {
   computed: {
     usabilidadInsignias() {
       return this.insignias.filter(
-        (insignia) => insignia.tipo === "usabilidad"
+        (insignia) => insignia.tipo === "Usabilidad"
       );
     },
   },
