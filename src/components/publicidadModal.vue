@@ -105,6 +105,7 @@ export default {
 
 .modal-overlay {
   position: absolute;
+  height: 1000px;
   top: 0;
   left: 0;
   bottom: 0;

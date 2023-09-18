@@ -1,18 +1,18 @@
 <template>
-  <div class="form-actividades rounded-md bg-white w-[600px] p-2 mb-10">
+  <div class="form-actividades rounded-md bg-white w-[600px] pt-6 pb-8 p-4 mb-4">
     <form @submit.prevent="onFormSubmit">
-      <h2 class="font-bold text-lg">Actividades</h2>
+      <h2 class="font-bold text-lg pb-2">Actividades</h2>
       <div class="contenido flex">
         <div class="actividades-labels mt-4">
-          <h4 class="mb-6">Título</h4>
-          <h4 class="mb-6">Cantidad</h4>
-          <h4 class="mb-6">Descripción</h4>
+          <h4 class="mb-10">Título</h4>
+          <h4 class="mb-10">Cantidad</h4>
+          <h4 class="mb-10">Descripción</h4>
         </div>
         <div class="actividades-inputs flex flex-col w-[75%]">
-          <input class="input-global" type="text" id="titulo" v-model="titulo" placeholder="Titulo de la actividad">
-          <input class="input-global" type="text" id="cantidad" v-model="cantidad"
+          <input class="input-globalA" type="text" id="titulo" v-model="titulo" placeholder="Titulo de la actividad">
+          <input class="input-globalA" type="text" id="cantidad" v-model="cantidad"
                  placeholder="# de acciones para completar actividad">
-          <input class="input-global" type="text" id="descripcion" v-model="descripcion"
+          <input class="input-globalA" type="text" id="descripcion" v-model="descripcion"
                  placeholder="Descripción para completar la actividad">
           <a class="text-xs text-gray-400 ml-[25px]">Ej: Llevas 0/# ... para tu siguiente insignia</a>
         </div>
@@ -197,9 +197,9 @@ export default {
 </script>
 
 <style>
-.input-global {
+.input-globalA {
   margin-left: 25px;
-  margin-top: 10px;
+  margin-top: 20px;
   position: relative;
   border: 2px solid #ccc;
   border-radius: 8px;
@@ -207,7 +207,6 @@ export default {
   height: 38px;
   padding: 5px;
 }
-
 
 .button-global {
   margin-bottom: 6px;

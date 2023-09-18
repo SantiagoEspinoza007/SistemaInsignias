@@ -9,7 +9,9 @@
       <div class="menu">
         <ul>
           <li>
+            <!-- Se utiliza router para redireccionar a diferentes paginas con los botones -->
             <router-link to="/">
+              <!--Se aplican estilos diferentes dependiendo de la pagina en la que se encuentre-->
               <button
                 :class="['button', { 'active-button': currentPage === '/' }]"
               >
@@ -71,6 +73,7 @@
     <!--  Main  -->
     <div class="main w-[1800px] h-[1000px] bg-clipAzul p-6">
       <div class="border h-full border-cyan-600 rounded-md border-2 p-4 flex">
+        <!-- Se crea una caja para las cards de Insginias Fidelizacion y Usabilidad -->
         <div class="insigniasF-U ml-8 mb-4 space-y-4 flex-col">
           <div class="insignias mt-2">
             <h3 class="text-2xl font-bold mb-4 text-center p-1">
@@ -78,6 +81,7 @@
             </h3>
             <p class="text-lg mb-2 text-center">TOP 5 más obtenidas</p>
             <div class="grid grid-cols-5">
+              <!-- Se obtienen las insignias de fidelizacion consumiendo el API -->
               <div class="insignia" v-for = "(item, index) in insigniasFidelizacion" :key ="index">
                 <p class="text-base text-center m-1 h-[40px]">{{ item.titulo }}</p>
                 <img :src="item.imagenUrl" alt="Insignia" width="45" height="45">
@@ -98,6 +102,7 @@
             </h3>
             <p class="text-lg mb-2 text-center">TOP 5 más obtenidas</p>
             <div class="grid grid-cols-5">
+              <!-- Se obtienen las insignias de usabilidad consumiendo el API -->
               <div class="insignia" v-for = "(item, index) in insigniasUsabilidad" :key ="index">
                 <p class="text-base text-center m-1 h-[40px]">{{ item.titulo }}</p>
                 <img :src="item.imagenUrl" alt="Insignia" width="45" height="45">
@@ -145,6 +150,7 @@
             </div>
 
           </div>
+          <!-- Se obtienen los resultados de los usuarios en una tabla consumiendo el API -->
           <div class="table rounded-md">
             <table class="table-auto rounded-md bg-white">
               <thead>

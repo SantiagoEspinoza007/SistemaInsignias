@@ -1,7 +1,7 @@
 <template>
-  <div class="form-insignias rounded-md bg-white w-[600px] p-2">
+  <div class="form-insignias rounded-md bg-white w-[600px] p-4">
     <form @submit.prevent="onFormSubmit">
-      <h2 class="font-bold text-lg">Insignias</h2>
+      <h2 class="font-bold text-lg pb-2">Insignias</h2>
       <div class="contenido flex">
         <div class="insignias-labels mt-4">
           <h4 class="mb-6">Título</h4>
@@ -11,8 +11,8 @@
           <h4 class="mb-6">Imagen</h4>
         </div>
         <div class="insignias-inputs w-[75%] mb-4">
-          <input class="input-global" id="titulo" v-model="titulo" type="text" placeholder="Nombre de la insignia">
-          <input class="input-global" type="text" id="descripcion" v-model="descripcion"
+          <input class="input-globalI" id="titulo" v-model="titulo" type="text" placeholder="Nombre de la insignia">
+          <input class="input-globalI" type="text" id="descripcion" v-model="descripcion"
                  placeholder="Descripción de la insignia">
           <div class="menus flex">
             <DropdownMenuW :options="optionsTipo"
@@ -31,7 +31,7 @@
             />
           </div>
           <div class="actividad flex mt-2">
-            <input class="input-global mr-4"
+            <input class="input-globalI mr-4"
                    type="text"
                    id="actividad"
                    v-model="actividad"
@@ -323,7 +323,7 @@ export default {
 </script>
 
 <style>
-.input-global {
+.input-globalI {
   margin-left: 25px;
   margin-top: 10px;
   position: relative;

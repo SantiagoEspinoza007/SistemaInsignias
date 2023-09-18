@@ -9,7 +9,9 @@
       <div class="menu">
         <ul>
           <li>
+            <!-- Se utiliza router para redireccionar a diferentes paginas con los botones -->
             <router-link to="/">
+              <!--Se aplican estilos diferentes dependiendo de la pagina en la que se encuentre-->
               <button
                 :class="['button', { 'active-button': currentPage === '/' }]"
               >
@@ -72,8 +74,8 @@
     <div class="main w-[1800px] h-[1000px] bg-clipAzul p-6">
       <div class="border h-full border-cyan-600 rounded-md border-2 p-12 flex">
         <div class="card-insignias flex-col justify-center">
+          <!-- Llamada al componente enviando la data usando props -->
           <dropdown-menu :options="optionsF" class="w-[200px]"></dropdown-menu>
-
           <div class="insigniasF mt-10">
             <h3 class="text-2xl font-bold mb-4 text-center p-7">
               Insignias de Fidelización
